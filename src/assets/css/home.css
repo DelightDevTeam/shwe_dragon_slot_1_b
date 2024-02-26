@@ -1,0 +1,120 @@
+body{
+    margin-bottom: 200px;
+}
+
+.fa-solid{
+    font-size: 24px !important;
+}
+.bannerImg{
+    width: 100%;
+    height: 350px ;
+    object-fit: cover ;
+}
+.gameImg{
+    height: 100px;
+    width: 200px;
+}
+
+footer{
+    background: linear-gradient(0deg,#02293a,#00354D);
+    box-shadow: 0 -5px 10px #0000004d;
+}
+.footerImg{
+    height: 30px;
+    width: 30px;
+   object-fit: cover;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+    background: transparent !important;
+    border: 2px solid goldenrod !important;
+    box-shadow: 0px 3px 14px -5px #ffc107;
+}
+.fade:not(.show){
+    display: none !important;
+    visibility: hidden !important;
+}
+@media screen and (min-width:980px) and (max-width:1030px) {
+    .hotGameImg{
+        height:200px;
+    }
+}
+@media screen and (min-width:570px) and (max-width:979px) {
+    .hotGameImg{
+        height:230px;
+    }
+}
+@media screen and (max-width:860px) {
+    .tabTitle{
+        font-size: 13px;
+        text-align: center;
+    }
+}
+@media screen and (max-width:800px) {
+    .bannerImg{
+        height: 250px ;
+    }
+}
+
+@media screen and (max-width:580px) {
+    
+    .bannerImg{
+        height: 200px ;
+    }
+    .tabTitle{
+        padding: 0 5px;
+    }
+    
+}
+@media screen and (max-width:570px){
+    .tabTitle{
+        padding: 0 20px;
+    }
+}
+
+@media screen and (max-width:400px){
+    .hotImg{
+        height: 120px;
+    }
+}
+@media screen and (max-width:390px){
+
+.gameImg{
+    height: 80px;
+} 
+}
+@media screen and (max-width:380px){
+   
+    .tabTitle{
+        padding: 0 10px;
+    }
+    .footerTitle{
+        font-size: 13px;
+    }
+    .bannerImg{
+        height: 150px ;
+    }
+    .playerInfoImg{
+        height: 40px;
+    }
+    .playerInfoTitle{
+        font-size: 13px;
+    }
+}
+@media screen and (max-width:340px) {
+    
+    .logo{
+        font-size: 20px;
+    }
+}
+@media screen and (max-width:320px) {
+    .gameImg{
+        height: 60px;
+    } 
+.fa-solid{
+        font-size: 18px !important;
+    }
+    .logo{
+        font-size: 18px;
+    }
+}
+

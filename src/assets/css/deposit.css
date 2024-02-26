@@ -1,0 +1,17 @@
+.accordion-title{
+    color: goldenrod;
+    margin-bottom: 0;
+}
+
+.accordion-div{
+    width: auto;
+    height: 70px;
+    font-size: 12px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    padding: 5px;
+    border: 1px solid goldenrod;
+}
+label{
+    color: gold !important;
+}

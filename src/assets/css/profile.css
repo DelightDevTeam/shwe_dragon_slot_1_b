@@ -1,0 +1,50 @@
+
+/* custom-tabs.css */
+
+.nav-tabs{
+    border: none;
+}
+  .custom-tab-menu-icon{
+    width: 30px;
+    height: 30px;
+  }
+
+  .custom-tab-menu-icon.active , .custom-tab-menu-icon:focus{
+    text-shadow: 0 0 5px goldenrod;
+    background-color: transparent;
+  }
+  .custom-tab-menu-icon.active div{
+    color: black;
+  }
+  
+  .custom-tab-content {
+    /* Add your custom styles for tab content here */
+    display: block;
+    color: #fff;
+    /* text-align: center; */
+  }
+
+  .form-control-input , .form-control-input:focus {
+    background-color: transparent;
+    color: #fff;
+  }
+
+  .form-control-input::placeholder{
+    color: #fff;
+  }
+
+  .profile-btn{
+    padding: 5px;
+    color: goldenrod;
+    text-shadow: 0 0 3px goldenrod;
+    letter-spacing: 1px;
+    border: 2px solid #00354D;
+    box-shadow: 0 0 5px gold;
+    outline: none;
+    background: transparent;
+  }
+
+
+
+
+

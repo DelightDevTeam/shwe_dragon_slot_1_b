@@ -61,6 +61,11 @@ import fish6 from "../../assets/img/homeTab/fish6.png";
 import cock1 from "../../assets/img/homeTab/cock1.png";
 import horse1 from "../../assets/img/homeTab/horse1.png";
 
+import lottery from '../../assets/img/homeTab/lottery.png'
+import promo from '../../assets/img/homeTab/promo.png'
+import jackpot from '../../assets/img/homeTab/jackpot-bg.png'
+import vsport from '../../assets/img/homeTab/virtual-sport.png'
+
 import sports1 from "../../assets/img/homeTab/asia_gaming.png";
 import sports2 from "../../assets/img/homeTab/sport3 (1).png";
 import "../../assets/css/home.css";
@@ -91,18 +96,18 @@ function HomeTabs() {
     { id: 1, img: allGames, title: "ALL GAMES" },
     { id: 2, img: hot, title: "HOT GAMES" },
     { id: 3, img: slots, title: "Slot" },
-    { id: 4, img: sport, title: "Live Casino" },
+    { id: 4, img: casino, title: "Live Casino" },
     { id: 5, img: sport, title: "Sport Book" },
-    { id: 6, img: sport, title: "Virtual Sport" },
-    { id: 7, img: sport, title: "Lottery" },
+    { id: 6, img: vsport, title: "Virtual Sport" },
+    { id: 7, img: lottery, title: "Lottery" },
     { id: 8, img: sport, title: "Qipai" },
     { id: 9, img: esport, title: "P2P" },
-    { id: 10, img: casino, title: "Fishing" },
+    { id: 10, img: fish, title: "Fishing" },
     { id: 11, img: casino, title: "Others" },
     { id: 12, img: cock, title: "Cock Fighting" },
-    { id: 13, img: cock, title: "Bonus" },
-    { id: 14, img: cock, title: "Jackpot" },
-    { id: 15, img: cock, title: "ESport" },
+    { id: 13, img: promo, title: "Bonus" },
+    { id: 14, img: jackpot, title: "Jackpot" },
+    { id: 15, img: esport, title: "ESport" },
   ];
   useEffect(() => {
     gameTypes &&

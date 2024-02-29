@@ -86,12 +86,12 @@ function Login() {
           )}
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label className="text-warning fw-bolder">
-              Account ID
+              Player Name
             </Form.Label>
             <Form.Control
               type="text"
               placeholder="Player Name..."
-              {...register("name", {
+              {...register("user_name", {
                 required: "Name is Required.",
               })}
               className={`${errors.name && "border-2 border-danger"}`}

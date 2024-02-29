@@ -67,6 +67,7 @@ import "../../assets/css/home.css";
 import useFetch from "../../hooks/useFetch";
 import BASE_URL from "../../hooks/baseURL";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function HomeTabs() {
   const {
@@ -77,17 +78,45 @@ function HomeTabs() {
   const { data: sportGames } = useFetch(BASE_URL + "/gameTypeProviders/3");
   const { data: casinoGames } = useFetch(BASE_URL + "/gameTypeProviders/2");
   const { data: hotGames } = useFetch(BASE_URL + "/hotgame");
-  console.log(sportGames);
-  const tabs = [
+  // console.log(sportGames);
+
+  const { data: gameTypes } = useFetch(BASE_URL + "/game/gameType");
+  // console.log(gameTypes);
+  const [tabs, setTabs] = useState();
+
+  // const [imgs, setImg] = useState([allGames, hot]);
+  // console.log(imgs);
+
+  const imgs = [
     { id: 1, img: allGames, title: "ALL GAMES" },
     { id: 2, img: hot, title: "HOT GAMES" },
-    { id: 3, img: slots, title: "SLOTS" },
-    { id: 4, img: sport, title: "SPORTBOOK" },
-    // {id:2,img:esport,title:'E-Sports'},
-    { id: 5, img: casino, title: "LIVE-CASINO" },
-    // {id:6,img:cock,title:'Cock Fighting'},
-    // {id:7,img:horse,title:'Horse Racing'},
+    { id: 3, img: slots, title: "Slot" },
+    { id: 4, img: sport, title: "Live Casino" },
+    { id: 5, img: sport, title: "Sport Book" },
+    { id: 6, img: sport, title: "Virtual Sport" },
+    { id: 7, img: sport, title: "Lottery" },
+    { id: 8, img: sport, title: "Qipai" },
+    { id: 9, img: esport, title: "P2P" },
+    { id: 10, img: casino, title: "Fishing" },
+    { id: 11, img: casino, title: "Others" },
+    { id: 12, img: cock, title: "Cock Fighting" },
+    { id: 13, img: cock, title: "Bonus" },
+    { id: 14, img: cock, title: "Jackpot" },
+    { id: 15, img: cock, title: "ESport" },
   ];
+  useEffect(() => {
+    gameTypes &&
+      gameTypes.map((gameType) => {
+        imgs &&
+          imgs.map((img) => {
+            console.log(img);
+          });
+        const data = {
+          name: gameType.name,
+        };
+      });
+  }, []);
+
   const contentTabs = [
     { id: 1, imgs: [] },
     { id: 2, imgs: [h1, h2, h3, h4, h5, h6, h7, h8, h9, h10] },
@@ -130,20 +159,21 @@ function HomeTabs() {
         <div>
           <Nav variant="pills" className="flex-column">
             <Nav.Item>
-              {tabs.map((tab) => {
-                return (
-                  <Nav.Link
-                    key={tab.id}
-                    className="border rounded-3 mb-1 py-0 py-sm-1 mb-sm-2 px-0 d-flex flex-column align-items-center "
-                    eventKey={tab.id}
-                  >
-                    <img style={{ height: "35px" }} src={tab.img} />
-                    <span className="tabTitle text-center text-light">
-                      {tab.title}
-                    </span>
-                  </Nav.Link>
-                );
-              })}
+              {imgs &&
+                imgs.map((tab) => {
+                  return (
+                    <Nav.Link
+                      key={tab.id}
+                      className="border rounded-3 mb-1 py-0 py-sm-1 mb-sm-2 px-0 d-flex flex-column align-items-center "
+                      eventKey={tab.id}
+                    >
+                      <img style={{ height: "35px" }} src={tab.img} />
+                      <span className="tabTitle text-center text-light">
+                        {tab.title}
+                      </span>
+                    </Nav.Link>
+                  );
+                })}
             </Nav.Item>
           </Nav>
         </div>

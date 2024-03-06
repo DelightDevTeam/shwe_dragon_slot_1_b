@@ -149,7 +149,7 @@ const Navbar = () => {
             <tbody>
               {modals &&
                 modals.map((modal) => (
-                  <tr>
+                  <tr key={modal.id}>
                     <td>{modal.title}</td>
                     <td>{modal.value}</td>
                   </tr>

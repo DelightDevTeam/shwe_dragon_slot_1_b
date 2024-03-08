@@ -51,6 +51,12 @@ function Login() {
         if (responseData) {
           const userData = responseData.data.user;
           localStorage.setItem("authToken", responseData.data.token);
+          localStorage.setItem(
+            "authUser",
+            JSON.stringify({
+              userData,
+            })
+          );
         } else {
           throw new Error("Token not found in response");
         }

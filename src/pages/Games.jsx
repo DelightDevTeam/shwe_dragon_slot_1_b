@@ -11,27 +11,41 @@ export default function Games() {
       navigate("/login");
     }
   }, []);
-  let providerId = localStorage.getItem("provider_id");
+  let product_id = localStorage.getItem("product_id");
   let gameTypeId = localStorage.getItem("gameType_id");
   let gameTitle = localStorage.getItem("title");
+  let authUser = JSON.parse(localStorage.getItem("authUser"));
+  let user = authUser.userData;
+  // console.log(authUser.userData);
 
   const {
     data: games,
     loading,
     error,
   } = useFetch(
-    BASE_URL + "/gamedetail/" + providerId + "/game_type/" + gameTypeId
+    BASE_URL + "/gamelist/" + product_id + "/" + gameTypeId
   );
-  console.log(games);
-  const launchGame = (gameId) => {
+  // console.log(games);
+  const launchGame = () => {
+    
+    const gameData = {
+      "MemberName" : user.user_name,
+      "password" : "password",
+      "productId" : product_id,
+      "gameType" : gameTypeId,
+      "LanguageCode" : "1",
+      "Platform" : "0"
+    }
+    console.log(gameData);
     //fetch api calling
-    fetch(BASE_URL + "/launchGame/" + gameId, {
-      method: "GET",
+    fetch(BASE_URL + "/game/Seamless/LaunchGame/" , {
+      method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("authToken"),
       },
+      body: JSON.stringify(gameData),
     })
       .then((response) => {
         if (!response.ok) {
@@ -41,8 +55,8 @@ export default function Games() {
         return response.json();
       })
       .then((data) => {
-        // console.log(data);
-        window.location.href = data.data;
+        console.log(data);
+        // window.location.href = data.data;
       })
       .catch((error) => {
         console.error("Launch Game error:", error);
@@ -62,11 +76,11 @@ export default function Games() {
                 {auth && (
                   <>
                     <div
-                      onClick={() => launchGame(game.id)}
+                      onClick={() => launchGame(game.code)}
                       style={{ cursor: "pointer" }}
                     >
                       <img
-                        src={game.image}
+                        src={game.image_url}
                         className="img-fluid rounded shadow"
                         alt=""
                       />

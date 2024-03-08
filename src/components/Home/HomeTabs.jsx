@@ -75,41 +75,24 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 function HomeTabs() {
-  const {
-    data: slotGames,
-    loading,
-    error,
-  } = useFetch(BASE_URL + "/game/gameTypeProducts/1");
-  const { data: casinoGames } = useFetch(BASE_URL + "/game/gameTypeProducts/2");
-  const { data: sportGames } = useFetch(BASE_URL + "/game/gameTypeProducts/3");
-  const { data: virtualGames } = useFetch(
-    BASE_URL + "/game/gameTypeProducts/4"
-  );
-  const { data: lotteryGames } = useFetch(
-    BASE_URL + "/game/gameTypeProducts/5"
-  );
-  const { data: qipaiGames } = useFetch(BASE_URL + "/game/gameTypeProducts/6");
-  const { data: p2pGames } = useFetch(BASE_URL + "/game/gameTypeProducts/7");
-  const { data: fishingGames } = useFetch(
-    BASE_URL + "/game/gameTypeProducts/8"
-  );
-  const { data: otherGames } = useFetch(BASE_URL + "/game/gameTypeProducts/9");
-  const { data: fightingGames } = useFetch(
-    BASE_URL + "/game/gameTypeProducts/10"
-  );
-  const { data: bonusGames } = useFetch(BASE_URL + "/game/gameTypeProducts/11");
-  const { data: jackpotGames } = useFetch(
-    BASE_URL + "/game/gameTypeProducts/12"
-  );
-  const { data: esportGames } = useFetch(
-    BASE_URL + "/game/gameTypeProducts/13"
-  );
+  // const [url, setUrl] = useState("");
 
-  const { data: hotGames } = useFetch(BASE_URL + "/hotgame");
-  // console.log(sportGames);
-
-  const { data: gameTypes } = useFetch(BASE_URL + "/game/gameType");
-  console.log(esportGames);
+  const {data: slotGames} = useFetch(BASE_URL + "/gameTypeProducts/1");
+  const { data: casinoGames } = useFetch(BASE_URL + "/gameTypeProducts/2");
+  const { data: sportGames } = useFetch(BASE_URL + "/gameTypeProducts/3");
+  const { data: virtualGames } = useFetch(BASE_URL + "/gameTypeProducts/4");
+  const { data: lotteryGames } = useFetch(BASE_URL + "/gameTypeProducts/5");
+  const { data: qipaiGames } = useFetch(BASE_URL + "/gameTypeProducts/6");
+  const { data: p2pGames } = useFetch(BASE_URL + "/gameTypeProducts/7");
+  const { data: fishingGames } = useFetch(BASE_URL + "/gameTypeProducts/8");
+  const { data: otherGames } = useFetch(BASE_URL + "/gameTypeProducts/9");
+  const { data: fightingGames } = useFetch(BASE_URL + "/gameTypeProducts/10");
+  const { data: bonusGames } = useFetch(BASE_URL + "/gameTypeProducts/11");
+  const { data: jackpotGames } = useFetch(BASE_URL + "/gameTypeProducts/12");
+  const { data: esportGames } = useFetch(BASE_URL + "/gameTypeProducts/13");
+  // const { data: hotGames } = useFetch(BASE_URL + "/hotgame");
+  const { data: gameTypes } = useFetch(BASE_URL + "/gameType");
+  // console.log(slotGames?.products?.length);
 
   const imgs = [
     { id: 1, img: allGames, title: "ALL GAMES" },
@@ -165,23 +148,33 @@ function HomeTabs() {
         console.error("Launch Game error:", error);
       });
   };
+  
   return (
-    <Tab.Container id="left-tabs-example" defaultActiveKey={3}>
+    <Tab.Container id="left-tabs-example" defaultActiveKey={0}>
       <div className="mt-5 d-flex  flex-nowrap ">
         <div>
           <Nav variant="pills" className="flex-column">
             <Nav.Item>
-              {imgs &&
-                imgs.map((tab) => {
+              <Nav.Link
+                className="border rounded-3 mb-1 py-0 py-sm-1 mb-sm-2 px-0 d-flex flex-column align-items-center "
+                eventKey={0}
+              >
+                <img style={{ height: "35px" }} src={allGames} />
+                <span className="tabTitle text-center text-light">
+                  All Games
+                </span>
+              </Nav.Link>
+              {gameTypes &&
+                gameTypes.map((tab) => {
                   return (
                     <Nav.Link
                       key={tab.id}
                       className="border rounded-3 mb-1 py-0 py-sm-1 mb-sm-2 px-0 d-flex flex-column align-items-center "
                       eventKey={tab.id}
                     >
-                      <img style={{ height: "35px" }} src={tab.img} />
+                      <img style={{ height: "35px" }} src={tab.img_url} />
                       <span className="tabTitle text-center text-light">
-                        {tab.title}
+                        {tab.name}
                       </span>
                     </Nav.Link>
                   );
@@ -192,34 +185,34 @@ function HomeTabs() {
         <div>
           <Tab.Content className="ms-sm-5">
             <div className="container" style={{ width: "100%" }}>
-              <Tab.Pane className="row " eventKey={3}>
-                {slotGames.products?.map((slotGame) => {
+              <Tab.Pane className="row " eventKey={1}>
+                {slotGames && slotGames.products?.map((slotGame) => {
                   return (
                     <Link
                       key={slotGame.id}
                       to={"/games"}
                       className="col-6 col-lg-4 col-xl-3 mb-4"
                       onClick={() => {
-                        localStorage.removeItem("provider_id");
+                        localStorage.removeItem("product_id");
                         localStorage.removeItem("gameType_id");
                         localStorage.removeItem("title");
-                        localStorage.setItem("provider_id", slotGame.id);
+                        localStorage.setItem("product_id", slotGame.id);
                         localStorage.setItem(
                           "gameType_id",
                           slotGame.pivot.game_type_id
                         );
-                        localStorage.setItem("title", slotGame.description);
+                        localStorage.setItem("title", slotGame.name);
                       }}
                     >
                       <img
                         className={`img-fluid rounded-sm-5 gameImg `}
-                        src={slotGame.pivot.image}
+                        src={slotGame.imgUrl}
                       />
                     </Link>
                   );
                 })}
               </Tab.Pane>
-              <Tab.Pane className="row " eventKey={5}>
+              <Tab.Pane className="row " eventKey={2}>
                 {sportGames.products?.map((sportGame) => {
                   return (
                     <Link
@@ -227,26 +220,26 @@ function HomeTabs() {
                       to={"/games"}
                       className="col-6 col-lg-4 col-xl-6 mb-4"
                       onClick={() => {
-                        localStorage.removeItem("provider_id");
+                        localStorage.removeItem("product_id");
                         localStorage.removeItem("gameType_id");
                         localStorage.removeItem("title");
-                        localStorage.setItem("provider_id", sportGame.id);
+                        localStorage.setItem("product_id", sportGame.id);
                         localStorage.setItem(
                           "gameType_id",
                           sportGame.pivot.game_type_id
                         );
-                        localStorage.setItem("title", sportGame.description);
+                        localStorage.setItem("title", sportGame.name);
                       }}
                     >
                       <img
                         className={`img-fluid rounded-sm-5 gameImg`}
-                        src={sportGame.pivot.image}
+                        src={sportGame.imgUrl}
                       />
                     </Link>
                   );
                 })}
               </Tab.Pane>
-              <Tab.Pane className="row " eventKey={4}>
+              <Tab.Pane className="row " eventKey={3}>
                 {casinoGames.products?.map((casinoGame) => {
                   return (
                     <Link
@@ -254,26 +247,26 @@ function HomeTabs() {
                       to={"/games"}
                       className="col-6 col-lg-4 col-xl-3"
                       onClick={() => {
-                        localStorage.removeItem("provider_id");
+                        localStorage.removeItem("product_id");
                         localStorage.removeItem("gameType_id");
                         localStorage.removeItem("title");
-                        localStorage.setItem("provider_id", casinoGame.id);
+                        localStorage.setItem("product_id", casinoGame.id);
                         localStorage.setItem(
                           "gameType_id",
                           casinoGame.pivot.game_type_id
                         );
-                        localStorage.setItem("title", casinoGame.description);
+                        localStorage.setItem("title", casinoGame.name);
                       }}
                     >
                       <img
                         className={`img-fluid mb-4 rounded-sm-5 gameImg`}
-                        src={casinoGame.pivot.image}
+                        src={casinoGame.imgUrl}
                       />
                     </Link>
                   );
                 })}
               </Tab.Pane>
-              <Tab.Pane className="row " eventKey={6}>
+              <Tab.Pane className="row " eventKey={4}>
                 {virtualGames.products?.map((virtualGame) => {
                   return (
                     <Link
@@ -281,26 +274,26 @@ function HomeTabs() {
                       to={"/games"}
                       className="col-6 col-lg-4 col-xl-3"
                       onClick={() => {
-                        localStorage.removeItem("provider_id");
+                        localStorage.removeItem("product_id");
                         localStorage.removeItem("gameType_id");
                         localStorage.removeItem("title");
-                        localStorage.setItem("provider_id", virtualGame.id);
+                        localStorage.setItem("product_id", virtualGame.id);
                         localStorage.setItem(
                           "gameType_id",
                           virtualGame.pivot.game_type_id
                         );
-                        localStorage.setItem("title", virtualGame.description);
+                        localStorage.setItem("title", virtualGame.name);
                       }}
                     >
                       <img
                         className={`img-fluid mb-4 rounded-sm-5 gameImg`}
-                        src={virtualGame.pivot.image}
+                        src={virtualGame.imgUrl}
                       />
                     </Link>
                   );
                 })}
               </Tab.Pane>
-              <Tab.Pane className="row " eventKey={7}>
+              <Tab.Pane className="row " eventKey={5}>
                 {lotteryGames.products?.map((lotteryGame) => {
                   return (
                     <Link
@@ -308,26 +301,26 @@ function HomeTabs() {
                       to={"/games"}
                       className="col-6 col-lg-4 col-xl-3"
                       onClick={() => {
-                        localStorage.removeItem("provider_id");
+                        localStorage.removeItem("product_id");
                         localStorage.removeItem("gameType_id");
                         localStorage.removeItem("title");
-                        localStorage.setItem("provider_id", lotteryGame.id);
+                        localStorage.setItem("product_id", lotteryGame.id);
                         localStorage.setItem(
                           "gameType_id",
                           lotteryGame.pivot.game_type_id
                         );
-                        localStorage.setItem("title", virtualGame.description);
+                        localStorage.setItem("title", virtualGame.name);
                       }}
                     >
                       <img
                         className={`img-fluid mb-4 rounded-sm-5 gameImg`}
-                        src={lotteryGame.pivot.image}
+                        src={lotteryGame.imgUrl}
                       />
                     </Link>
                   );
                 })}
               </Tab.Pane>
-              <Tab.Pane className="row " eventKey={8}>
+              <Tab.Pane className="row " eventKey={6}>
                 {qipaiGames.products?.map((qipaiGame) => {
                   return (
                     <Link
@@ -335,26 +328,26 @@ function HomeTabs() {
                       to={"/games"}
                       className="col-6 col-lg-4 col-xl-3"
                       onClick={() => {
-                        localStorage.removeItem("provider_id");
+                        localStorage.removeItem("product_id");
                         localStorage.removeItem("gameType_id");
                         localStorage.removeItem("title");
-                        localStorage.setItem("provider_id", qipaiGame.id);
+                        localStorage.setItem("product_id", qipaiGame.id);
                         localStorage.setItem(
                           "gameType_id",
                           qipaiGame.pivot.game_type_id
                         );
-                        localStorage.setItem("title", qipaiGame.description);
+                        localStorage.setItem("title", qipaiGame.name);
                       }}
                     >
                       <img
                         className={`img-fluid mb-4 rounded-sm-5 gameImg`}
-                        src={qipaiGame.pivot.image}
+                        src={qipaiGame.imgUrl}
                       />
                     </Link>
                   );
                 })}
               </Tab.Pane>
-              <Tab.Pane className="row " eventKey={9}>
+              <Tab.Pane className="row " eventKey={7}>
                 {p2pGames.products?.map((p2pGame) => {
                   return (
                     <Link
@@ -362,26 +355,26 @@ function HomeTabs() {
                       to={"/games"}
                       className="col-6 col-lg-4 col-xl-3"
                       onClick={() => {
-                        localStorage.removeItem("provider_id");
+                        localStorage.removeItem("product_id");
                         localStorage.removeItem("gameType_id");
                         localStorage.removeItem("title");
-                        localStorage.setItem("provider_id", p2pGame.id);
+                        localStorage.setItem("product_id", p2pGame.id);
                         localStorage.setItem(
                           "gameType_id",
                           p2pGame.pivot.game_type_id
                         );
-                        localStorage.setItem("title", p2pGame.description);
+                        localStorage.setItem("title", p2pGame.name);
                       }}
                     >
                       <img
                         className={`img-fluid mb-4 rounded-sm-5 gameImg`}
-                        src={p2pGame.pivot.image}
+                        src={p2pGame.imgUrl}
                       />
                     </Link>
                   );
                 })}
               </Tab.Pane>
-              <Tab.Pane className="row " eventKey={10}>
+              <Tab.Pane className="row " eventKey={8}>
                 {fishingGames.products?.map((fishingGame) => {
                   return (
                     <Link
@@ -389,26 +382,26 @@ function HomeTabs() {
                       to={"/games"}
                       className="col-6 col-lg-4 col-xl-3"
                       onClick={() => {
-                        localStorage.removeItem("provider_id");
+                        localStorage.removeItem("product_id");
                         localStorage.removeItem("gameType_id");
                         localStorage.removeItem("title");
-                        localStorage.setItem("provider_id", fishingGame.id);
+                        localStorage.setItem("product_id", fishingGame.id);
                         localStorage.setItem(
                           "gameType_id",
                           fishingGame.pivot.game_type_id
                         );
-                        localStorage.setItem("title", fishingGame.description);
+                        localStorage.setItem("title", fishingGame.name);
                       }}
                     >
                       <img
                         className={`img-fluid mb-4 rounded-sm-5 gameImg`}
-                        src={fishingGame.pivot.image}
+                        src={fishingGame.imgUrl}
                       />
                     </Link>
                   );
                 })}
               </Tab.Pane>
-              <Tab.Pane className="row " eventKey={11}>
+              <Tab.Pane className="row " eventKey={9}>
                 {otherGames.products?.map((otherGame) => {
                   return (
                     <Link
@@ -416,26 +409,26 @@ function HomeTabs() {
                       to={"/games"}
                       className="col-6 col-lg-4 col-xl-3"
                       onClick={() => {
-                        localStorage.removeItem("provider_id");
+                        localStorage.removeItem("product_id");
                         localStorage.removeItem("gameType_id");
                         localStorage.removeItem("title");
-                        localStorage.setItem("provider_id", otherGame.id);
+                        localStorage.setItem("product_id", otherGame.id);
                         localStorage.setItem(
                           "gameType_id",
                           otherGame.pivot.game_type_id
                         );
-                        localStorage.setItem("title", otherGame.description);
+                        localStorage.setItem("title", otherGame.name);
                       }}
                     >
                       <img
                         className={`img-fluid mb-4 rounded-sm-5 gameImg`}
-                        src={otherGame.pivot.image}
+                        src={otherGame.imgUrl}
                       />
                     </Link>
                   );
                 })}
               </Tab.Pane>
-              <Tab.Pane className="row " eventKey={12}>
+              <Tab.Pane className="row " eventKey={10}>
                 {fightingGames.products?.map((fightingGame) => {
                   return (
                     <Link
@@ -443,26 +436,26 @@ function HomeTabs() {
                       to={"/games"}
                       className="col-6 col-lg-4 col-xl-3"
                       onClick={() => {
-                        localStorage.removeItem("provider_id");
+                        localStorage.removeItem("product_id");
                         localStorage.removeItem("gameType_id");
                         localStorage.removeItem("title");
-                        localStorage.setItem("provider_id", fightingGame.id);
+                        localStorage.setItem("product_id", fightingGame.id);
                         localStorage.setItem(
                           "gameType_id",
                           fightingGame.pivot.game_type_id
                         );
-                        localStorage.setItem("title", fightingGame.description);
+                        localStorage.setItem("title", fightingGame.name);
                       }}
                     >
                       <img
                         className={`img-fluid mb-4 rounded-sm-5 gameImg`}
-                        src={fightingGame.pivot.image}
+                        src={fightingGame.imgUrl}
                       />
                     </Link>
                   );
                 })}
               </Tab.Pane>
-              <Tab.Pane className="row " eventKey={13}>
+              <Tab.Pane className="row " eventKey={11}>
                 {bonusGames.products?.map((bonusGame) => {
                   return (
                     <Link
@@ -470,26 +463,26 @@ function HomeTabs() {
                       to={"/games"}
                       className="col-6 col-lg-4 col-xl-3"
                       onClick={() => {
-                        localStorage.removeItem("provider_id");
+                        localStorage.removeItem("product_id");
                         localStorage.removeItem("gameType_id");
                         localStorage.removeItem("title");
-                        localStorage.setItem("provider_id", bonusGame.id);
+                        localStorage.setItem("product_id", bonusGame.id);
                         localStorage.setItem(
                           "gameType_id",
                           bonusGame.pivot.game_type_id
                         );
-                        localStorage.setItem("title", bonusGame.description);
+                        localStorage.setItem("title", bonusGame.name);
                       }}
                     >
                       <img
                         className={`img-fluid mb-4 rounded-sm-5 gameImg`}
-                        src={bonusGame.pivot.image}
+                        src={bonusGame.imgUrl}
                       />
                     </Link>
                   );
                 })}
               </Tab.Pane>
-              <Tab.Pane className="row " eventKey={14}>
+              <Tab.Pane className="row " eventKey={12}>
                 {jackpotGames.products?.map((jackpotGame) => {
                   return (
                     <Link
@@ -497,26 +490,26 @@ function HomeTabs() {
                       to={"/games"}
                       className="col-6 col-lg-4 col-xl-3"
                       onClick={() => {
-                        localStorage.removeItem("provider_id");
+                        localStorage.removeItem("product_id");
                         localStorage.removeItem("gameType_id");
                         localStorage.removeItem("title");
-                        localStorage.setItem("provider_id", jackpotGame.id);
+                        localStorage.setItem("product_id", jackpotGame.id);
                         localStorage.setItem(
                           "gameType_id",
                           bonusGame.pivot.game_type_id
                         );
-                        localStorage.setItem("title", jackpotGame.description);
+                        localStorage.setItem("title", jackpotGame.name);
                       }}
                     >
                       <img
                         className={`img-fluid mb-4 rounded-sm-5 gameImg`}
-                        src={jackpotGame.pivot.image}
+                        src={jackpotGame.imgUrl}
                       />
                     </Link>
                   );
                 })}
               </Tab.Pane>
-              <Tab.Pane className="row " eventKey={15}>
+              <Tab.Pane className="row " eventKey={13}>
                 {esportGames.products?.map((esportGame) => {
                   return (
                     <Link
@@ -524,27 +517,27 @@ function HomeTabs() {
                       to={"/games"}
                       className="col-6 col-lg-4 col-xl-3"
                       onClick={() => {
-                        localStorage.removeItem("provider_id");
+                        localStorage.removeItem("product_id");
                         localStorage.removeItem("gameType_id");
                         localStorage.removeItem("title");
-                        localStorage.setItem("provider_id", esportGame.id);
+                        localStorage.setItem("product_id", esportGame.id);
                         localStorage.setItem(
                           "gameType_id",
                           esportGame.pivot.game_type_id
                         );
-                        localStorage.setItem("title", esportGame.description);
+                        localStorage.setItem("title", esportGame.name);
                       }}
                     >
                       <img
                         className={`img-fluid mb-4 rounded-sm-5 gameImg`}
-                        src={esportGame.pivot.image}
+                        src={esportGame.imgUrl}
                       />
                     </Link>
                   );
                 })}
               </Tab.Pane>
 
-              <Tab.Pane className="row " eventKey={2}>
+              {/* <Tab.Pane className="row " eventKey={2}>
                 {hotGames?.map((hotGame) => {
                   return (
                     <img
@@ -555,90 +548,416 @@ function HomeTabs() {
                     />
                   );
                 })}
-              </Tab.Pane>
-              <Tab.Pane className="row " eventKey={1}>
-                <h2 className="text-light">Slots</h2>
-                {slotGames.providers?.map((slotGame) => {
-                  return (
-                    <Link
-                      key={slotGame.id}
-                      to={"/games"}
-                      className="col-6 col-lg-4 col-xl-3 mb-4"
-                      onClick={() => {
-                        localStorage.removeItem("provider_id");
-                        localStorage.removeItem("gameType_id");
-                        localStorage.removeItem("title");
-                        localStorage.setItem("provider_id", slotGame.id);
-                        localStorage.setItem(
-                          "gameType_id",
-                          slotGame.pivot.game_type_id
-                        );
-                        localStorage.setItem("title", slotGame.description);
-                      }}
-                    >
-                      {/* fix error */}
-                      <img
-                        className={`img-fluid rounded-sm-5 gameImg`}
-                        src={slotGame.img_url}
-                      />
-                    </Link>
-                  );
-                })}
+              </Tab.Pane> */}
+              <Tab.Pane className="row " eventKey={0}>
+                {slotGames.length != 0 && (
+                  <>
+                  <div className="d-flex">
+                    <h2 className="text-light mb-4">Slots </h2>
+                    {/* <div>
+                      <span className="badge text-bg-primary">{slotGames?.products?.length}</span>
+                    </div> */}
+                  </div>
+                    
+                    {slotGames && slotGames.products?.map((game) => {
+                      return (
+                        <Link
+                          key={game.id}
+                          to={"/games"}
+                          className="col-6 col-lg-4 col-xl-3 mb-4"
+                          onClick={() => {
+                            localStorage.removeItem("product_id");
+                            localStorage.removeItem("gameType_id");
+                            localStorage.removeItem("title");
+                            localStorage.setItem("product_id", game.id);
+                            localStorage.setItem(
+                              "gameType_id",
+                              game.pivot.game_type_id
+                            );
+                            localStorage.setItem("title", game.name);
+                          }}
+                        >
+                          <img
+                            className={`img-fluid rounded-sm-5 gameImg `}
+                            src={game.imgUrl}
+                          />
+                        </Link>
+                      );
+                    })}
+                  </>
+                )}
 
-                <h2 className="text-light">Sports</h2>
-                {/* {sportGames.providers?.map((sportGame) => {
-                  return (
-                    <Link
-                      key={sportGame.id}
-                      to={"/games"}
-                      className="col-6 col-lg-4 col-xl-3 mb-4"
-                      onClick={() => {
-                        localStorage.removeItem("provider_id");
-                        localStorage.removeItem("gameType_id");
-                        localStorage.removeItem("title");
-                        localStorage.setItem("provider_id", sportGame.id);
-                        localStorage.setItem(
-                          "gameType_id",
-                          sportGame.pivot.game_type_id
-                        );
-                        localStorage.setItem("title", sportGame.description);
-                      }}
-                    >
-                      <img
-                        className={`img-fluid rounded-sm-5 gameImg`}
-                        src={sportGame.img_url}
-                      />
-                    </Link>
-                  );
-                })} */}
+                {sportGames.length != 0 && (
+                  <>
+                    <h2 className="text-light mb-4 mt-5">Sports</h2>
+                    {sportGames && sportGames.products?.map((game) => {
+                      return (
+                        <Link
+                          key={game.id}
+                          to={"/games"}
+                          className="col-6 col-lg-4 col-xl-3 mb-4"
+                          onClick={() => {
+                            localStorage.removeItem("product_id");
+                            localStorage.removeItem("gameType_id");
+                            localStorage.removeItem("title");
+                            localStorage.setItem("product_id", game.id);
+                            localStorage.setItem(
+                              "gameType_id",
+                              game.pivot.game_type_id
+                            );
+                            localStorage.setItem("title", game.name);
+                          }}
+                        >
+                          <img
+                            className={`img-fluid rounded-sm-5 gameImg `}
+                            src={game.imgUrl}
+                          />
+                        </Link>
+                      );
+                    })}
+                  </>
+                )}
 
-                <h2 className="text-light">Live Casino</h2>
-                {casinoGames.providers?.map((casinoGame) => {
-                  return (
-                    <Link
-                      key={casinoGame.id}
-                      to={"/games"}
-                      className="col-6 col-lg-4 col-xl-3"
-                      onClick={() => {
-                        localStorage.removeItem("provider_id");
-                        localStorage.removeItem("gameType_id");
-                        localStorage.removeItem("title");
-                        localStorage.setItem("provider_id", casinoGames.id);
-                        localStorage.setItem(
-                          "gameType_id",
-                          casinoGames.pivot.game_type_id
-                        );
-                        localStorage.setItem("title", casinoGames.description);
-                      }}
-                    >
-                      <img
-                        className={`img-fluid mb-4 rounded-sm-5 gameImg`}
-                        src={casinoGame.img_url}
-                      />
-                      <div>{casinoGame.name}</div>
-                    </Link>
-                  );
-                })}
+                {casinoGames.length != 0 && (
+                  <>
+                    <h2 className="text-light mb-4 mt-5">Live Casino</h2>
+                    {casinoGames && casinoGames.products?.map((game) => {
+                      return (
+                        <Link
+                          key={game.id}
+                          to={"/games"}
+                          className="col-6 col-lg-4 col-xl-3 mb-4"
+                          onClick={() => {
+                            localStorage.removeItem("product_id");
+                            localStorage.removeItem("gameType_id");
+                            localStorage.removeItem("title");
+                            localStorage.setItem("product_id", game.id);
+                            localStorage.setItem(
+                              "gameType_id",
+                              game.pivot.game_type_id
+                            );
+                            localStorage.setItem("title", game.name);
+                          }}
+                        >
+                          <img
+                            className={`img-fluid rounded-sm-5 gameImg `}
+                            src={game.imgUrl}
+                          />
+                        </Link>
+                      );
+                    })}
+                  </>
+                )}
+
+                {virtualGames.length != 0 && (
+                  <>
+                    <h2 className="text-light mb-4 mt-5">Virtual Game</h2>
+                    {virtualGames && virtualGames.products?.map((game) => {
+                      return (
+                        <Link
+                          key={game.id}
+                          to={"/games"}
+                          className="col-6 col-lg-4 col-xl-3 mb-4"
+                          onClick={() => {
+                            localStorage.removeItem("product_id");
+                            localStorage.removeItem("gameType_id");
+                            localStorage.removeItem("title");
+                            localStorage.setItem("product_id", game.id);
+                            localStorage.setItem(
+                              "gameType_id",
+                              game.pivot.game_type_id
+                            );
+                            localStorage.setItem("title", game.name);
+                          }}
+                        >
+                          <img
+                            className={`img-fluid rounded-sm-5 gameImg `}
+                            src={game.imgUrl}
+                          />
+                        </Link>
+                      );
+                    })}
+                  </>
+                )}
+
+                {lotteryGames.length != 0 && (
+                  <>
+                    <h2 className="text-light mb-4 mt-5">Lottery Game</h2>
+                    {lotteryGames && lotteryGames.products?.map((game) => {
+                      return (
+                        <Link
+                          key={game.id}
+                          to={"/games"}
+                          className="col-6 col-lg-4 col-xl-3 mb-4"
+                          onClick={() => {
+                            localStorage.removeItem("product_id");
+                            localStorage.removeItem("gameType_id");
+                            localStorage.removeItem("title");
+                            localStorage.setItem("product_id", game.id);
+                            localStorage.setItem(
+                              "gameType_id",
+                              game.pivot.game_type_id
+                            );
+                            localStorage.setItem("title", game.name);
+                          }}
+                        >
+                          <img
+                            className={`img-fluid rounded-sm-5 gameImg `}
+                            src={game.imgUrl}
+                          />
+                        </Link>
+                      );
+                    })}
+                  </>
+                )}
+
+                {qipaiGames.length != 0 && (
+                  <>
+                    <h2 className="text-light mb-4 mt-5">QiPai Games</h2>
+                    {qipaiGames && qipaiGames.products?.map((game) => {
+                      return (
+                        <Link
+                          key={game.id}
+                          to={"/games"}
+                          className="col-6 col-lg-4 col-xl-3 mb-4"
+                          onClick={() => {
+                            localStorage.removeItem("product_id");
+                            localStorage.removeItem("gameType_id");
+                            localStorage.removeItem("title");
+                            localStorage.setItem("product_id", game.id);
+                            localStorage.setItem(
+                              "gameType_id",
+                              game.pivot.game_type_id
+                            );
+                            localStorage.setItem("title", game.name);
+                          }}
+                        >
+                          <img
+                            className={`img-fluid rounded-sm-5 gameImg `}
+                            src={game.imgUrl}
+                          />
+                        </Link>
+                      );
+                    })}
+                  </>
+                )}
+
+                {p2pGames.length != 0 && (
+                  <>
+                    <h2 className="text-light mb-4 mt-5">P2P Games</h2>
+                    {p2pGames && p2pGames.products?.map((game) => {
+                      return (
+                        <Link
+                          key={game.id}
+                          to={"/games"}
+                          className="col-6 col-lg-4 col-xl-3 mb-4"
+                          onClick={() => {
+                            localStorage.removeItem("product_id");
+                            localStorage.removeItem("gameType_id");
+                            localStorage.removeItem("title");
+                            localStorage.setItem("product_id", game.id);
+                            localStorage.setItem(
+                              "gameType_id",
+                              game.pivot.game_type_id
+                            );
+                            localStorage.setItem("title", game.name);
+                          }}
+                        >
+                          <img
+                            className={`img-fluid rounded-sm-5 gameImg `}
+                            src={game.imgUrl}
+                          />
+                        </Link>
+                      );
+                    })}
+                  </>
+                )}
+
+                {fishingGames.length != 0 && (
+                  <>
+                    <h2 className="text-light mb-4 mt-5">Fishing</h2>
+                    {fishingGames && fishingGames.products?.map((game) => {
+                      return (
+                        <Link
+                          key={game.id}
+                          to={"/games"}
+                          className="col-6 col-lg-4 col-xl-3 mb-4"
+                          onClick={() => {
+                            localStorage.removeItem("product_id");
+                            localStorage.removeItem("gameType_id");
+                            localStorage.removeItem("title");
+                            localStorage.setItem("product_id", game.id);
+                            localStorage.setItem(
+                              "gameType_id",
+                              game.pivot.game_type_id
+                            );
+                            localStorage.setItem("title", game.name);
+                          }}
+                        >
+                          <img
+                            className={`img-fluid rounded-sm-5 gameImg `}
+                            src={game.imgUrl}
+                          />
+                        </Link>
+                      );
+                    })}
+                  </>
+                )}
+
+                {otherGames.length != 0 && (
+                  <>
+                    <h2 className="text-light mb-4 mt-5">Other Games</h2>
+                    {otherGames && otherGames.products?.map((game) => {
+                      return (
+                        <Link
+                          key={game.id}
+                          to={"/games"}
+                          className="col-6 col-lg-4 col-xl-3 mb-4"
+                          onClick={() => {
+                            localStorage.removeItem("product_id");
+                            localStorage.removeItem("gameType_id");
+                            localStorage.removeItem("title");
+                            localStorage.setItem("product_id", game.id);
+                            localStorage.setItem(
+                              "gameType_id",
+                              game.pivot.game_type_id
+                            );
+                            localStorage.setItem("title", game.name);
+                          }}
+                        >
+                          <img
+                            className={`img-fluid rounded-sm-5 gameImg `}
+                            src={game.imgUrl}
+                          />
+                        </Link>
+                      );
+                    })}
+                  </>
+                )}
+
+                {fightingGames.length != 0 && (
+                  <>
+                    <h2 className="text-light mb-4 mt-5">Cork Fighting</h2>
+                    {fightingGames && fightingGames.products?.map((game) => {
+                      return (
+                        <Link
+                          key={game.id}
+                          to={"/games"}
+                          className="col-6 col-lg-4 col-xl-3 mb-4"
+                          onClick={() => {
+                            localStorage.removeItem("product_id");
+                            localStorage.removeItem("gameType_id");
+                            localStorage.removeItem("title");
+                            localStorage.setItem("product_id", game.id);
+                            localStorage.setItem(
+                              "gameType_id",
+                              game.pivot.game_type_id
+                            );
+                            localStorage.setItem("title", game.name);
+                          }}
+                        >
+                          <img
+                            className={`img-fluid rounded-sm-5 gameImg `}
+                            src={game.imgUrl}
+                          />
+                        </Link>
+                      );
+                    })}
+                  </>
+                )}
+
+                {bonusGames.length != 0 && (
+                  <>
+                    <h2 className="text-light mb-4 mt-5">Bonus Games</h2>
+                    {bonusGames && bonusGames.products?.map((game) => {
+                      return (
+                        <Link
+                          key={game.id}
+                          to={"/games"}
+                          className="col-6 col-lg-4 col-xl-3 mb-4"
+                          onClick={() => {
+                            localStorage.removeItem("product_id");
+                            localStorage.removeItem("gameType_id");
+                            localStorage.removeItem("title");
+                            localStorage.setItem("product_id", game.id);
+                            localStorage.setItem(
+                              "gameType_id",
+                              game.pivot.game_type_id
+                            );
+                            localStorage.setItem("title", game.name);
+                          }}
+                        >
+                          <img
+                            className={`img-fluid rounded-sm-5 gameImg `}
+                            src={game.imgUrl}
+                          />
+                        </Link>
+                      );
+                    })}
+                  </>
+                )}
+
+                {jackpotGames.length != 0 && (
+                  <>
+                    <h2 className="text-light mb-4 mt-5">Jackpot</h2>
+                    {jackpotGames && jackpotGames.products?.map((game) => {
+                      return (
+                        <Link
+                          key={game.id}
+                          to={"/games"}
+                          className="col-6 col-lg-4 col-xl-3 mb-4"
+                          onClick={() => {
+                            localStorage.removeItem("product_id");
+                            localStorage.removeItem("gameType_id");
+                            localStorage.removeItem("title");
+                            localStorage.setItem("product_id", game.id);
+                            localStorage.setItem(
+                              "gameType_id",
+                              game.pivot.game_type_id
+                            );
+                            localStorage.setItem("title", game.name);
+                          }}
+                        >
+                          <img
+                            className={`img-fluid rounded-sm-5 gameImg `}
+                            src={game.imgUrl}
+                          />
+                        </Link>
+                      );
+                    })}
+                  </>
+                )}
+
+                {esportGames.length != 0 && (
+                  <>
+                    <h2 className="text-light mb-4 mt-5">Esport</h2>
+                    {esportGames && esportGames.products?.map((game) => {
+                      return (
+                        <Link
+                          key={game.id}
+                          to={"/games"}
+                          className="col-6 col-lg-4 col-xl-3 mb-4"
+                          onClick={() => {
+                            localStorage.removeItem("product_id");
+                            localStorage.removeItem("gameType_id");
+                            localStorage.removeItem("title");
+                            localStorage.setItem("product_id", game.id);
+                            localStorage.setItem(
+                              "gameType_id",
+                              game.pivot.game_type_id
+                            );
+                            localStorage.setItem("title", game.name);
+                          }}
+                        >
+                          <img
+                            className={`img-fluid rounded-sm-5 gameImg `}
+                            src={game.imgUrl}
+                          />
+                        </Link>
+                      );
+                    })}
+                  </>
+                )}
               </Tab.Pane>
             </div>
           </Tab.Content>

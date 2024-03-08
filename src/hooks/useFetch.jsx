@@ -17,7 +17,7 @@ const useFetch = (url) => {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: "Bearer " + localStorage.getItem("authToken"),
+        Authorization: "Bearer " + localStorage.getItem("authToken") ?? "",
       },
       signal,
     })

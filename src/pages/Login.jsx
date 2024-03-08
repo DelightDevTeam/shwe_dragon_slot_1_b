@@ -86,7 +86,7 @@ function Login() {
           )}
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label className="text-warning fw-bolder">
-              Player Names
+              Player Name
             </Form.Label>
             <Form.Control
               type="text"

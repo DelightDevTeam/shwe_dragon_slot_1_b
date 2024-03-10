@@ -97,9 +97,12 @@ function HomeTabs() {
   // return;
 
   let auth = localStorage.getItem("authToken");
-  const navigate = useNavigate();
-  let authUser = JSON.parse(localStorage.getItem("authUser"));
-  let user = authUser.userData;
+  // const navigate = useNavigate();
+  if(auth){
+    let authUser = JSON.parse(localStorage.getItem("authUser"));
+    let user = authUser.userData;
+  }
+
 
 
   const launchGame = (gameTypeId, product_code) => {

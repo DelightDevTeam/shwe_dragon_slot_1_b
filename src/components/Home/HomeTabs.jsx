@@ -104,12 +104,12 @@ function HomeTabs() {
     if(auth){
       let user = authUser.userData;
       const gameData = {
-        "MemberName" : user.user_name,
-        "password" : "password",
+        // "MemberName" : user.user_name,
+        // "password" : "password",
         "productId" : product_code,
         "gameType" : gameTypeId,
-        "LanguageCode" : "1",
-        "Platform" : "0"
+        // "LanguageCode" : "1",
+        // "Platform" : "0"
       }
       //fetch api calling
       fetch(BASE_URL + "/game/Seamless/LaunchGame/" , {

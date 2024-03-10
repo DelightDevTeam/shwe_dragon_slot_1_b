@@ -130,7 +130,8 @@ function HomeTabs() {
         })
         .then((data) => {
           // console.log(data.Url);
-          window.location.href = data.Url;
+          // window.location.href = data.Url;
+          window.open(data.Url, '_blank');
         })
         .catch((error) => {
           console.error("Launch Game error:", error);

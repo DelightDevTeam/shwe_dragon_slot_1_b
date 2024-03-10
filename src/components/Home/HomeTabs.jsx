@@ -97,48 +97,48 @@ function HomeTabs() {
   // return;
 
   let auth = localStorage.getItem("authToken");
-  // const navigate = useNavigate();
-  if(auth){
-    let authUser = JSON.parse(localStorage.getItem("authUser"));
-    let user = authUser.userData;
-  }
-
-
+  let authUser = JSON.parse(localStorage.getItem("authUser"));
+  const navigate = useNavigate();
 
   const launchGame = (gameTypeId, product_code) => {
-    const gameData = {
-      "MemberName" : user.user_name,
-      "password" : "password",
-      "productId" : product_code,
-      "gameType" : gameTypeId,
-      "LanguageCode" : "1",
-      "Platform" : "0"
+    if(auth){
+      let user = authUser.userData;
+      const gameData = {
+        "MemberName" : user.user_name,
+        "password" : "password",
+        "productId" : product_code,
+        "gameType" : gameTypeId,
+        "LanguageCode" : "1",
+        "Platform" : "0"
+      }
+      //fetch api calling
+      fetch(BASE_URL + "/game/Seamless/LaunchGame/" , {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("authToken"),
+        },
+        body: JSON.stringify(gameData),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Launch Game failed");
+          }
+          console.log("Launch Game success");
+          return response.json();
+        })
+        .then((data) => {
+          // console.log(data.Url);
+          window.location.href = data.Url;
+        })
+        .catch((error) => {
+          console.error("Launch Game error:", error);
+        });
+    }else{
+      navigate('/login');
     }
-    // console.log(gameData);
-    //fetch api calling
-    fetch(BASE_URL + "/game/Seamless/LaunchGame/" , {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("authToken"),
-      },
-      body: JSON.stringify(gameData),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Launch Game failed");
-        }
-        console.log("Launch Game success");
-        return response.json();
-      })
-      .then((data) => {
-        // console.log(data.Url);
-        window.location.href = data.Url;
-      })
-      .catch((error) => {
-        console.error("Launch Game error:", error);
-      });
+
   };
   
   return (

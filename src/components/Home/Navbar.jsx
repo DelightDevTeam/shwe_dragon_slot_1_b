@@ -11,6 +11,9 @@ const Navbar = () => {
   const navigate = useNavigate();
   // const [auth, setAuth] = useState();
   const auth = localStorage.getItem('authToken');
+  const authUser = JSON.parse(localStorage.getItem('authUser')).userData;
+  // console.log(authUser);
+
 
   useEffect(() => {}, [auth]);
 
@@ -95,12 +98,12 @@ const Navbar = () => {
             <button
               className='bg-transparent btn'
               style={{ outline: 'none' }}
-              onClick={handleShow}
             >
               <i className='fa-solid fa-wallet text-light'></i>
             </button>
+            
             <div>
-              <span>{user?.balance} MMK</span>
+              <span>{authUser.balance} MMK</span>
             </div>
           </div>
         )}

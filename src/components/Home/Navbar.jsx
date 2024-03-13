@@ -99,7 +99,7 @@ const Navbar = () => {
             </button>
 
             <div>
-              <span>{authUser?.balance} MMK</span>
+              <span>{parseFloat(authUser?.balance)} MMK</span>
             </div>
           </div>
         )}

@@ -99,7 +99,7 @@ const Navbar = () => {
             </button>
 
             <div>
-              <span>{authUser.balance} MMK</span>
+              <span>{authUser?.balance} MMK</span>
             </div>
           </div>
         )}

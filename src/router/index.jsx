@@ -12,6 +12,7 @@ import PromotionPage from "../pages/Promotion";
 import Games from "../pages/Games";
 import HistoryPage from "../pages/HistoryPage";
 import GameLogPage from "../pages/GameLog";
+import PromotionDetail from "../pages/PromotionDetail";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "/promotion",
         element: <PromotionPage />,
+      },
+      {
+        path: "/promotionDetail",
+        element: <PromotionDetail />,
       },
       {
         path: "/history",

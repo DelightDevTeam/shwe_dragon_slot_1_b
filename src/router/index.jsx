@@ -10,6 +10,8 @@ import LoginPage from "../pages/Login";
 import RegisterPage from "../pages/Register";
 import PromotionPage from "../pages/Promotion";
 import Games from "../pages/Games";
+import HistoryPage from "../pages/HistoryPage";
+import GameLogPage from "../pages/GameLog";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,14 @@ const router = createBrowserRouter([
       {
         path: "/promotion",
         element: <PromotionPage />,
+      },
+      {
+        path: "/history",
+        element: <HistoryPage />,
+      },
+      {
+        path: "/game-log",
+        element: <GameLogPage />,
       },
       {
         path: "/login",

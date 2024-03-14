@@ -82,7 +82,7 @@ const Navbar = () => {
         <h2 className="logo mt-1  " style={{ color: "gold" }}>
           <img src={logo} width={45} alt="" />
         </h2>
-        <h5 className=' logoTitle ms-2 text-light'>Shwe Dragon Slot</h5>
+        <h5 className=' logoTitle ms-2 text-light'>Dragon City</h5>
       </NavLink>
       {window.location.pathname === '/' ? <div className="logoIcon d-flex gap-2 gap-sm-4 align-items-center text-white">
         {auth && (
@@ -127,7 +127,7 @@ const Navbar = () => {
                   color: "#FFD700",
                   padding: "6px 30px",
                 }}
-                className="bg-none rounded-2"
+                className="ms-2 bg-none rounded-2"
               >
                 LOGIN
               </button>

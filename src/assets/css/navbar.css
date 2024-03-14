@@ -3,6 +3,10 @@
     font-size: 18px;
 }
 
+.logo img {
+    border-radius: 10px;
+    border: 1px solid #011119;
+}
 
 @media screen and (max-width:620px) {
     .logoTitle {

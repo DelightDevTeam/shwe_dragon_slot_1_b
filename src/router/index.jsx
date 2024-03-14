@@ -24,10 +24,7 @@ const router = createBrowserRouter([
         path: "/profile",
         element: <Profile />,
       },
-      {
-        path: "/deposit",
-        element: <Deposit />,
-      },
+
       {
         path: "/incomeletter",
         element: <Incomeletter />,

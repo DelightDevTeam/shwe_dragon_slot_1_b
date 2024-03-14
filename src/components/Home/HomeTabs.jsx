@@ -78,7 +78,7 @@ import { Button } from "react-bootstrap";
 function HomeTabs() {
   // const [url, setUrl] = useState("");
 
-  const {data: slotGames} = useFetch(BASE_URL + "/gameTypeProducts/1");
+  const { data: slotGames } = useFetch(BASE_URL + "/gameTypeProducts/1");
   const { data: casinoGames } = useFetch(BASE_URL + "/gameTypeProducts/2");
   const { data: sportGames } = useFetch(BASE_URL + "/gameTypeProducts/3");
   const { data: virtualGames } = useFetch(BASE_URL + "/gameTypeProducts/4");
@@ -101,18 +101,18 @@ function HomeTabs() {
   const navigate = useNavigate();
 
   const launchGame = (gameTypeId, product_code) => {
-    if(auth){
+    if (auth) {
       let user = authUser.userData;
       const gameData = {
         // "MemberName" : user.user_name,
         // "password" : "password",
-        "productId" : product_code,
-        "gameType" : gameTypeId,
+        "productId": product_code,
+        "gameType": gameTypeId,
         // "LanguageCode" : "1",
         // "Platform" : "0"
       }
       //fetch api calling
-      fetch(BASE_URL + "/game/Seamless/LaunchGame/" , {
+      fetch(BASE_URL + "/game/Seamless/LaunchGame/", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -136,15 +136,15 @@ function HomeTabs() {
         .catch((error) => {
           console.error("Launch Game error:", error);
         });
-    }else{
+    } else {
       navigate('/login');
     }
 
   };
-  
+
   return (
     <Tab.Container id="left-tabs-example" defaultActiveKey={0}>
-      <div className="mt-5 d-flex  flex-nowrap ">
+      <div className="mt-3 d-flex  flex-nowrap ">
         <div>
           <Nav variant="pills" className="flex-column">
             <Nav.Item>
@@ -162,10 +162,10 @@ function HomeTabs() {
                   return (
                     <Nav.Link
                       key={tab.id}
-                      className="border rounded-3 mb-1 py-0 py-sm-1 mb-sm-2 px-0 d-flex flex-column align-items-center "
+                      className="border rounded-3 mb-2 py-0 py-sm-1 mb-sm-2 px-0 d-flex flex-column align-items-center "
                       eventKey={tab.id}
                     >
-                      <img style={{ height: "35px" }} src={tab.img_url} />
+                      <img className="tabImg" src={tab.img_url} />
                       <span className="tabTitle text-center text-light">
                         {tab.name}
                       </span>
@@ -177,14 +177,14 @@ function HomeTabs() {
         </div>
         <div>
           <Tab.Content className="ms-sm-5">
-            <div className="container" style={{ width: "100%" }}>
+            <div className="container customContainer">
               <Tab.Pane className="row " eventKey={1}>
                 {slotGames && slotGames.products?.map((slotGame) => {
                   return (
                     <Link
                       key={slotGame.id}
-                      className="col-6 col-lg-4 col-xl-3 mb-4 btn"
-                      onClick={()=>launchGame(slotGames.id, slotGame.code)}
+                      className="col-6 col-lg-4 col-xl-3 mb-1 mb-sm-4 btn"
+                      onClick={() => launchGame(slotGames.id, slotGame.code)}
                     >
                       <img
                         className={`img-fluid rounded-sm-5 gameImg `}
@@ -200,10 +200,10 @@ function HomeTabs() {
                     <Link
                       key={casinoGame.id}
                       className="col-6 col-lg-4 col-xl-3"
-                      onClick={()=>launchGame(casinoGames.id, casinoGame.code)}
+                      onClick={() => launchGame(casinoGames.id, casinoGame.code)}
                     >
                       <img
-                        className={`img-fluid mb-4 rounded-sm-5 gameImg`}
+                        className={`img-fluid  mb-3 mb-sm-4 rounded-sm-5 gameImg`}
                         src={casinoGame.imgUrl}
                       />
                     </Link>
@@ -215,8 +215,8 @@ function HomeTabs() {
                   return (
                     <Link
                       key={sportGame.id}
-                      className="col-6 col-lg-4 col-xl-6 mb-4"
-                      onClick={()=>launchGame(sportGames.id, sportGame.code)}
+                      className="col-6 col-lg-4 col-xl-6 mb-3 mb-sm-4"
+                      onClick={() => launchGame(sportGames.id, sportGame.code)}
                     >
                       <img
                         className={`img-fluid rounded-sm-5 gameImg`}
@@ -232,10 +232,10 @@ function HomeTabs() {
                     <Link
                       key={virtualGame.id}
                       className="col-6 col-lg-4 col-xl-3"
-                      onClick={()=>launchGame(virtualGames.id, virtualGame.code)}
+                      onClick={() => launchGame(virtualGames.id, virtualGame.code)}
                     >
                       <img
-                        className={`img-fluid mb-4 rounded-sm-5 gameImg`}
+                        className={`img-fluid  mb-3 mb-sm-4 rounded-sm-5 gameImg`}
                         src={virtualGame.imgUrl}
                       />
                     </Link>
@@ -248,10 +248,10 @@ function HomeTabs() {
                     <Link
                       key={lotteryGame.id}
                       className="col-6 col-lg-4 col-xl-3"
-                      onClick={()=>launchGame(lotteryGames.id, lotteryGame.code)}
+                      onClick={() => launchGame(lotteryGames.id, lotteryGame.code)}
                     >
                       <img
-                        className={`img-fluid mb-4 rounded-sm-5 gameImg`}
+                        className={`img-fluid  mb-3 mb-sm-4 rounded-sm-5 gameImg`}
                         src={lotteryGame.imgUrl}
                       />
                     </Link>
@@ -264,10 +264,10 @@ function HomeTabs() {
                     <Link
                       key={qipaiGame.id}
                       className="col-6 col-lg-4 col-xl-3"
-                      onClick={()=>launchGame(qipaiGames.id, qipaiGame.code)}
+                      onClick={() => launchGame(qipaiGames.id, qipaiGame.code)}
                     >
                       <img
-                        className={`img-fluid mb-4 rounded-sm-5 gameImg`}
+                        className={`img-fluid  mb-3 mb-sm-4 rounded-sm-5 gameImg`}
                         src={qipaiGame.imgUrl}
                       />
                     </Link>
@@ -280,10 +280,10 @@ function HomeTabs() {
                     <Link
                       key={p2pGame.id}
                       className="col-6 col-lg-4 col-xl-3"
-                      onClick={()=>launchGame(p2pGames.id, p2pGame.code)}
+                      onClick={() => launchGame(p2pGames.id, p2pGame.code)}
                     >
                       <img
-                        className={`img-fluid mb-4 rounded-sm-5 gameImg`}
+                        className={`img-fluid  mb-3 mb-sm-4 rounded-sm-5 gameImg`}
                         src={p2pGame.imgUrl}
                       />
                     </Link>
@@ -296,10 +296,10 @@ function HomeTabs() {
                     <Link
                       key={fishingGame.id}
                       className="col-6 col-lg-4 col-xl-3"
-                      onClick={()=>launchGame(fishingGames.id, fishingGame.code)}
+                      onClick={() => launchGame(fishingGames.id, fishingGame.code)}
                     >
                       <img
-                        className={`img-fluid mb-4 rounded-sm-5 gameImg`}
+                        className={`img-fluid  mb-3 mb-sm-4 rounded-sm-5 gameImg`}
                         src={fishingGame.imgUrl}
                       />
                     </Link>
@@ -312,10 +312,10 @@ function HomeTabs() {
                     <Link
                       key={otherGame.id}
                       className="col-6 col-lg-4 col-xl-3"
-                      onClick={()=>launchGame(otherGames.id, otherGame.code)}
+                      onClick={() => launchGame(otherGames.id, otherGame.code)}
                     >
                       <img
-                        className={`img-fluid mb-4 rounded-sm-5 gameImg`}
+                        className={`img-fluid  mb-3 mb-sm-4 rounded-sm-5 gameImg`}
                         src={otherGame.imgUrl}
                       />
                     </Link>
@@ -328,10 +328,10 @@ function HomeTabs() {
                     <Link
                       key={fightingGame.id}
                       className="col-6 col-lg-4 col-xl-3"
-                      onClick={()=>launchGame(fightingGames.id, fightingGame.code)}
+                      onClick={() => launchGame(fightingGames.id, fightingGame.code)}
                     >
                       <img
-                        className={`img-fluid mb-4 rounded-sm-5 gameImg`}
+                        className={`img-fluid  mb-3 mb-sm-4 rounded-sm-5 gameImg`}
                         src={fightingGame.imgUrl}
                       />
                     </Link>
@@ -344,10 +344,10 @@ function HomeTabs() {
                     <Link
                       key={bonusGame.id}
                       className="col-6 col-lg-4 col-xl-3"
-                      onClick={()=>launchGame(bonusGames.id, bonusGame.code)}
+                      onClick={() => launchGame(bonusGames.id, bonusGame.code)}
                     >
                       <img
-                        className={`img-fluid mb-4 rounded-sm-5 gameImg`}
+                        className={`img-fluid  mb-3 mb-sm-4 rounded-sm-5 gameImg`}
                         src={bonusGame.imgUrl}
                       />
                     </Link>
@@ -360,10 +360,10 @@ function HomeTabs() {
                     <Link
                       key={jackpotGames.id}
                       className="col-6 col-lg-4 col-xl-3"
-                      onClick={()=>launchGame(jackpotGames.id, jackpotGame.code)}
+                      onClick={() => launchGame(jackpotGames.id, jackpotGame.code)}
                     >
                       <img
-                        className={`img-fluid mb-4 rounded-sm-5 gameImg`}
+                        className={`img-fluid  mb-3 mb-sm-4 rounded-sm-5 gameImg`}
                         src={jackpotGame.imgUrl}
                       />
                     </Link>
@@ -376,10 +376,10 @@ function HomeTabs() {
                     <Link
                       key={esportGame.id}
                       className="col-6 col-lg-4 col-xl-3"
-                      onClick={()=>launchGame(esportGames.id, esportGame.code)}
+                      onClick={() => launchGame(esportGames.id, esportGame.code)}
                     >
                       <img
-                        className={`img-fluid mb-4 rounded-sm-5 gameImg`}
+                        className={`img-fluid  mb-3 mb-sm-4 rounded-sm-5 gameImg`}
                         src={esportGame.imgUrl}
                       />
                     </Link>
@@ -402,27 +402,27 @@ function HomeTabs() {
               <Tab.Pane className="row " eventKey={0}>
                 {slotGames.length != 0 && (
                   <>
-                  <div className="d-flex">
-                    <h2 className="text-light mb-4">Slots </h2>
-                    {/* <div>
+                    <div className="d-flex">
+                      <h2 className="text-light mb-1 mb-sm-4">Slots </h2>
+                      {/* <div>
                       <span className="badge text-bg-primary">{slotGames?.products?.length}</span>
                     </div> */}
-                  </div>
-                    
-                  {slotGames && slotGames.products?.map((slotGame) => {
-                    return (
-                      <Link
-                        key={slotGame.id}
-                        className="col-6 col-lg-4 col-xl-3 mb-4 btn"
-                        onClick={()=>launchGame(slotGames.id, slotGame.code)}
-                      >
-                        <img
-                          className={`img-fluid rounded-sm-5 gameImg `}
-                          src={slotGame.imgUrl}
-                        />
-                      </Link>
-                    );
-                  })}
+                    </div>
+
+                    {slotGames && slotGames.products?.map((slotGame) => {
+                      return (
+                        <Link
+                          key={slotGame.id}
+                          className="col-6 col-lg-4 col-xl-3  mb-1 mb-sm-4 btn"
+                          onClick={() => launchGame(slotGames.id, slotGame.code)}
+                        >
+                          <img
+                            className={`img-fluid rounded-sm-5 gameImg `}
+                            src={slotGame.imgUrl}
+                          />
+                        </Link>
+                      );
+                    })}
                   </>
                 )}
 
@@ -433,8 +433,8 @@ function HomeTabs() {
                       return (
                         <Link
                           key={sportGame.id}
-                          className="col-6 col-lg-4 col-xl-6 mb-4"
-                          onClick={()=>launchGame(sportGames.id, sportGame.code)}
+                          className="col-6 col-lg-4 col-xl-6  mb-3 mb-sm-4"
+                          onClick={() => launchGame(sportGames.id, sportGame.code)}
                         >
                           <img
                             className={`img-fluid rounded-sm-5 gameImg`}
@@ -454,10 +454,10 @@ function HomeTabs() {
                         <Link
                           key={casinoGame.id}
                           className="col-6 col-lg-4 col-xl-3"
-                          onClick={()=>launchGame(casinoGames.id, casinoGame.code)}
+                          onClick={() => launchGame(casinoGames.id, casinoGame.code)}
                         >
                           <img
-                            className={`img-fluid mb-4 rounded-sm-5 gameImg`}
+                            className={`img-fluid  mb-3 mb-sm-4 rounded-sm-5 gameImg`}
                             src={casinoGame.imgUrl}
                           />
                         </Link>
@@ -474,10 +474,10 @@ function HomeTabs() {
                         <Link
                           key={virtualGame.id}
                           className="col-6 col-lg-4 col-xl-3"
-                          onClick={()=>launchGame(virtualGames.id, virtualGame.code)}
+                          onClick={() => launchGame(virtualGames.id, virtualGame.code)}
                         >
                           <img
-                            className={`img-fluid mb-4 rounded-sm-5 gameImg`}
+                            className={`img-fluid  mb-3 mb-sm-4 rounded-sm-5 gameImg`}
                             src={virtualGame.imgUrl}
                           />
                         </Link>
@@ -494,10 +494,10 @@ function HomeTabs() {
                         <Link
                           key={lotteryGame.id}
                           className="col-6 col-lg-4 col-xl-3"
-                          onClick={()=>launchGame(lotteryGames.id, lotteryGame.code)}
+                          onClick={() => launchGame(lotteryGames.id, lotteryGame.code)}
                         >
                           <img
-                            className={`img-fluid mb-4 rounded-sm-5 gameImg`}
+                            className={`img-fluid  mb-3 mb-sm-4 rounded-sm-5 gameImg`}
                             src={lotteryGame.imgUrl}
                           />
                         </Link>
@@ -514,10 +514,10 @@ function HomeTabs() {
                         <Link
                           key={qipaiGame.id}
                           className="col-6 col-lg-4 col-xl-3"
-                          onClick={()=>launchGame(qipaiGames.id, qipaiGame.code)}
+                          onClick={() => launchGame(qipaiGames.id, qipaiGame.code)}
                         >
                           <img
-                            className={`img-fluid mb-4 rounded-sm-5 gameImg`}
+                            className={`img-fluid  mb-3 mb-sm-4 rounded-sm-5 gameImg`}
                             src={qipaiGame.imgUrl}
                           />
                         </Link>
@@ -534,10 +534,10 @@ function HomeTabs() {
                         <Link
                           key={p2pGame.id}
                           className="col-6 col-lg-4 col-xl-3"
-                          onClick={()=>launchGame(p2pGames.id, p2pGame.code)}
+                          onClick={() => launchGame(p2pGames.id, p2pGame.code)}
                         >
                           <img
-                            className={`img-fluid mb-4 rounded-sm-5 gameImg`}
+                            className={`img-fluid  mb-3 mb-sm-4 rounded-sm-5 gameImg`}
                             src={p2pGame.imgUrl}
                           />
                         </Link>
@@ -554,10 +554,10 @@ function HomeTabs() {
                         <Link
                           key={fishingGame.id}
                           className="col-6 col-lg-4 col-xl-3"
-                          onClick={()=>launchGame(fishingGames.id, fishingGame.code)}
+                          onClick={() => launchGame(fishingGames.id, fishingGame.code)}
                         >
                           <img
-                            className={`img-fluid mb-4 rounded-sm-5 gameImg`}
+                            className={`img-fluid  mb-3 mb-sm-4 rounded-sm-5 gameImg`}
                             src={fishingGame.imgUrl}
                           />
                         </Link>
@@ -574,10 +574,10 @@ function HomeTabs() {
                         <Link
                           key={otherGame.id}
                           className="col-6 col-lg-4 col-xl-3"
-                          onClick={()=>launchGame(otherGames.id, otherGame.code)}
+                          onClick={() => launchGame(otherGames.id, otherGame.code)}
                         >
                           <img
-                            className={`img-fluid mb-4 rounded-sm-5 gameImg`}
+                            className={`img-fluid  mb-3 mb-sm-4 rounded-sm-5 gameImg`}
                             src={otherGame.imgUrl}
                           />
                         </Link>
@@ -594,10 +594,10 @@ function HomeTabs() {
                         <Link
                           key={fightingGame.id}
                           className="col-6 col-lg-4 col-xl-3"
-                          onClick={()=>launchGame(fightingGames.id, fightingGame.code)}
+                          onClick={() => launchGame(fightingGames.id, fightingGame.code)}
                         >
                           <img
-                            className={`img-fluid mb-4 rounded-sm-5 gameImg`}
+                            className={`img-fluid  mb-3 mb-sm-4 rounded-sm-5 gameImg`}
                             src={fightingGame.imgUrl}
                           />
                         </Link>
@@ -614,10 +614,10 @@ function HomeTabs() {
                         <Link
                           key={bonusGame.id}
                           className="col-6 col-lg-4 col-xl-3"
-                          onClick={()=>launchGame(bonusGames.id, bonusGame.code)}
+                          onClick={() => launchGame(bonusGames.id, bonusGame.code)}
                         >
                           <img
-                            className={`img-fluid mb-4 rounded-sm-5 gameImg`}
+                            className={`img-fluid  mb-3 mb-sm-4 rounded-sm-5 gameImg`}
                             src={bonusGame.imgUrl}
                           />
                         </Link>
@@ -634,10 +634,10 @@ function HomeTabs() {
                         <Link
                           key={jackpotGames.id}
                           className="col-6 col-lg-4 col-xl-3"
-                          onClick={()=>launchGame(jackpotGames.id, jackpotGame.code)}
+                          onClick={() => launchGame(jackpotGames.id, jackpotGame.code)}
                         >
                           <img
-                            className={`img-fluid mb-4 rounded-sm-5 gameImg`}
+                            className={`img-fluid  mb-3 mb-sm-4 rounded-sm-5 gameImg`}
                             src={jackpotGame.imgUrl}
                           />
                         </Link>
@@ -654,10 +654,10 @@ function HomeTabs() {
                         <Link
                           key={esportGame.id}
                           className="col-6 col-lg-4 col-xl-3"
-                          onClick={()=>launchGame(esportGames.id, esportGame.code)}
+                          onClick={() => launchGame(esportGames.id, esportGame.code)}
                         >
                           <img
-                            className={`img-fluid mb-4 rounded-sm-5 gameImg`}
+                            className={`img-fluid  mb-3 mb-sm-4 rounded-sm-5 gameImg`}
                             src={esportGame.imgUrl}
                           />
                         </Link>
@@ -689,7 +689,7 @@ const AllGamesContent = () => {
           {slots.map((img) => {
             return (
               <img
-                className="img-fluid gameImg col-6  col-lg-4 col-xl-3 mb-4 "
+                className="img-fluid gameImg col-6  col-lg-4 col-xl-3  mb-1 mb-sm-4 "
                 src={img}
               />
             );
@@ -702,7 +702,7 @@ const AllGamesContent = () => {
           {sports.map((img) => {
             return (
               <img
-                className=" col-6  col-lg-4  col-xl-3 mb-4  img-fluid gameImg"
+                className=" col-6  col-lg-4  col-xl-3  mb-1 mb-sm-4  img-fluid gameImg"
                 src={img}
               />
             );
@@ -715,7 +715,7 @@ const AllGamesContent = () => {
           {casinos.map((img) => {
             return (
               <img
-                className="col-6 col-lg-4 col-xl-3 mb-4  img-fluid gameImg"
+                className="col-6 col-lg-4 col-xl-3  mb-2 mb-sm-4 img-fluid gameImg"
                 src={img}
               />
             );

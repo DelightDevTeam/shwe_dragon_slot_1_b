@@ -138,16 +138,16 @@ const Profile = () => {
   return (
     <>
       {user && (
-        <div className="row mt-4">
+        <div className="px-2 px-sm-0 row mt-4">
           <div className="col-lg-4 col-md-6 offset-lg-4 offset-md-3">
             <div className="d-flex justify-content-center align-items-center">
-              <img
+              {/* <img
                 className="rounded-circle border border-3 border-warning"
                 src={user && PROFILE_URL + "/" + user.profile}
                 width={100}
                 alt=""
-              />
-              <div className="mx-3">
+              /> */}
+              <div className="mx-3 mb-2">
                 <p className="fw-bold h3" style={{ color: "#eee" }}>
                   {user.name}
                 </p>
@@ -204,15 +204,7 @@ const Profile = () => {
                           <span className="text-danger">*{error.phone}</span>
                         )}
                       </Form.Group>
-                      <Form.Group className="mb-5" controlId="image">
-                        <Form.Label>Image</Form.Label>
-                        <Form.Control
-                          className="form-control-input"
-                          type="file"
-                          value={image}
-                          onChange={(e) => setImage(e.target.files[0])}
-                        />
-                      </Form.Group>
+
                       <div className="d-flex justify-content-center">
                         <button className="profile-btn w-100" type="submit">
                           တင်သွင်းသည်
@@ -277,6 +269,22 @@ const Profile = () => {
                           <span className="text-danger">*{error.password}</span>
                         )}
                       </Form.Group>
+                      {/* <Form.Group
+                        className="mb-3"
+                        controlId="passwordForm.ControlInput3"
+                      >
+                        <Form.Label>Confirm Password</Form.Label>
+                        <Form.Control
+                          className="form-control-input"
+                          type="password"
+                          placeholder=""
+                          onChange={(e) => setPassword(e.target.value)}
+                          value={password}
+                        />
+                        {error.password && (
+                          <span className="text-danger">*{error.password}</span>
+                        )}
+                      </Form.Group> */}
                       <div className="d-flex justify-content-center mt-5">
                         <button className="profile-btn w-100">
                           တင်သွင်းသည်

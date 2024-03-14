@@ -5,6 +5,7 @@ import { Modal, Table } from "react-bootstrap";
 import logo from "../../assets/img/logo.png";
 import axios from "axios";
 import BASE_URL from "../../hooks/baseURL";
+import '../../assets/css/navbar.css';
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
@@ -14,7 +15,7 @@ const Navbar = () => {
   const authUser = JSON.parse(localStorage.getItem("authUser"))?.userData;
   // console.log(authUser);
 
-  useEffect(() => {}, [auth]);
+  useEffect(() => { }, [auth]);
 
   // useEffect(() => {
   //   setAuth(localStorage.getItem('authToken'));
@@ -60,6 +61,7 @@ const Navbar = () => {
     getWallet();
     getAuthUser();
   }, []);
+  console.log('window.location.pathname', window.location.pathname);
 
   const modals = [
     { id: 1, title: "ASIAGAMING", value: wallets?.ag_wallet },
@@ -75,31 +77,32 @@ const Navbar = () => {
     { id: 11, title: "SBO", value: wallets?.s3_wallet },
   ];
   return (
-    <div className="border-bottom py-sm-1 py-3 px-2 px-sm-5 d-flex flex-wrap align-items-center justify-content-between">
-      <NavLink className="text-decoration-none" to={"/"}>
-        <h2 className="logo mt-1" style={{ color: "gold" }}>
-          <img src={logo} width={60} alt="" />
+    <div className="border-bottom py-1 py-md-2 px-2 px-md-5 d-flex flex-wrap align-items-center justify-content-start justify-content-sm-between">
+      <NavLink className="text-decoration-none d-flex navLogo align-items-center " to={"/"}>
+        <h2 className="logo mt-1  " style={{ color: "gold" }}>
+          <img src={logo} width={45} alt="" />
         </h2>
+        <h5 className=' logoTitle ms-2 text-light'>Shwe Dragon Slot</h5>
       </NavLink>
-      <div className="d-flex gap-2 gap-sm-4 align-items-center text-white">
+      {window.location.pathname === '/' ? <div className="logoIcon d-flex gap-2 gap-sm-4 align-items-center text-white">
         {auth && (
           <div>
             {/* <i class='fa-solid fa-user'></i> */}
             <NavLink to={"/profile"}>
               <i className="fa-solid fa-user text-light"></i>
             </NavLink>
-            <span className="fw-bold ms-2 me-3">ID :</span>
-            <span>{user?.name}</span>
+            <span className=" userText fw-bold ms-1 me-1 ms-sm-2 me-sm-2">ID :</span>
+            <span className="userText">{user?.name}</span>
           </div>
         )}
         {auth && (
-          <div className="d-flex gap-2 gap-sm-4 align-items-center text-white">
-            <button className="bg-transparent btn" style={{ outline: "none" }}>
-              <i className="fa-solid fa-wallet text-light"></i>
-            </button>
+          <div className="d-flex gap-1 gap-sm-2   align-items-center text-white">
+            {/* <button className="bg-transparent btn" style={{ outline: "none" }}> */}
+            <i className="fa-solid fa-wallet text-light"></i>
+            {/* </button> */}
 
             <div>
-              <span>{parseFloat(authUser?.balance)} MMK</span>
+              <span className="userText">{parseFloat(authUser?.balance)} MMK</span>
             </div>
           </div>
         )}
@@ -131,7 +134,7 @@ const Navbar = () => {
             </NavLink>
           </>
         )}
-      </div>
+      </div> : ''}
       {/* change user name */}
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton>

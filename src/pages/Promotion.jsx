@@ -16,7 +16,13 @@ function PromotionPage() {
       <h1 className="text-center text-light mt-4 mb-3 mb-lg-5">Promotions</h1>
 
       {promotionData.map((img) => {
-        return <img className='mx-auto my-2 proImg mb-4' src={img} />
+        return (
+          <>
+          <a href='/promotionDetail'>
+            <img className='mx-auto my-2 proImg mb-4' src={img} />
+          </a>
+          </>
+        );
       })}
 
 

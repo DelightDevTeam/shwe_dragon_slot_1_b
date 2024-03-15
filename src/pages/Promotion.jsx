@@ -9,6 +9,7 @@ import sb1 from '../assets/img/promotions/sb1.gif'
 import sb2 from '../assets/img/promotions/sb2.gif'
 import sb3 from '../assets/img/promotions/sb3.gif'
 import '../assets/css/promotion.css'
+import { NavLink } from 'react-router-dom';
 function PromotionPage() {
   const promotionData = [mb1, mb2, mb3, sb1, sb2, sb3, db1, db2]
   return (
@@ -18,9 +19,9 @@ function PromotionPage() {
       {promotionData.map((img) => {
         return (
           <>
-          <a href='/promotionDetail'>
+          <NavLink to={'/promotionDetail'}>
             <img className='mx-auto my-2 proImg mb-4' src={img} />
-          </a>
+          </NavLink>
           </>
         );
       })}

@@ -1,7 +1,14 @@
 import React from "react";
 import promotion from '../assets/img/promotions/mb1.gif'
+import { useParams } from "react-router-dom";
+import useFetch from "../hooks/useFetch";
+import BASE_URL from "../hooks/baseURL";
 
 const PromotionDetail = ()=>{
+    const {id} = useParams();
+    const {data:promotion} = useFetch(BASE_URL+'/promotion')
+    // console.log(id);
+    // return;
     return (
         <>
         <img src={promotion} className="w-100" alt="" />

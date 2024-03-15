@@ -24,12 +24,14 @@ const Profile = () => {
     "Kpay",
     "Wave Money",
   ];
-  const { data: user } = useFetch(BASE_URL + "/user");
+  const { data: authUser } = useFetch(BASE_URL + "/user");
+  const[user, setUser] = useState(authUser);
+  const[name, setName] = useState("")
   const [phone, setPhone] = useState("");
   const [image, setImage] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
@@ -46,7 +48,7 @@ const Profile = () => {
     e.preventDefault();
     const inputData = {
       phone: phone,
-      image: image,
+      name: name,
     };
     fetch(BASE_URL + "/profile", {
       method: "POST",
@@ -79,6 +81,8 @@ const Profile = () => {
       })
       .then((data) => {
         // console.log(data);
+        setUser(data.data)
+        console.log(data.data);
         setSuccess("Profile Updated Successfully.");
       })
       .catch((error) => {
@@ -89,8 +93,9 @@ const Profile = () => {
   const handlePassword = (e) => {
     e.preventDefault();
     const inputData = {
-      currentPassword: currentPassword,
+      current_password: currentPassword,
       password: password,
+      password_confirmation: confirmPassword,
     };
     // console.log(inputData);
     fetch(BASE_URL + "/changePassword", {
@@ -125,6 +130,7 @@ const Profile = () => {
       .then((data) => {
         // console.log(data);
         setSuccess("New Password Changed Successfully.");
+        setError("")
       })
       .catch((error) => {
         console.error(error);
@@ -132,28 +138,33 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    setPhone(user.phone);
-  }, [user]);
+    setUser(authUser);
+    setName(authUser.name)
+    setPhone(authUser.phone);
+  }, [authUser]);
+
+  const balance = user?.balance;
+  const formattedBalance = user && balance ? parseFloat(balance).toLocaleString() : '';
 
   return (
     <>
       {user && (
         <div className="px-2 px-sm-0 row mt-4">
           <div className="col-lg-4 col-md-6 offset-lg-4 offset-md-3">
-            <div className="d-flex justify-content-center align-items-center">
+            <div className="d-flex justify-content-start align-items-center">
               {/* <img
                 className="rounded-circle border border-3 border-warning"
                 src={user && PROFILE_URL + "/" + user.profile}
                 width={100}
                 alt=""
               /> */}
-              <div className="mx-3 mb-2">
+              <div className=" mb-2">
                 <p className="fw-bold h3" style={{ color: "#eee" }}>
-                  {user.name}
+                  {user && user.name}
                 </p>
                 <span style={{ color: "#ddd" }}>
                   <i className="fas fa-wallet"></i>{" "}
-                  {user?.balance?.toLocaleString("en-US")} MMK
+                  {formattedBalance} MMK
                 </span>
               </div>
             </div>
@@ -187,8 +198,8 @@ const Profile = () => {
                           className="form-control-input"
                           type="text"
                           placeholder="Enter Username"
-                          readOnly
-                          value={user && user.name}
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
                         />
                       </Form.Group>
                       <Form.Group className="mb-3" controlId="phone">
@@ -247,9 +258,9 @@ const Profile = () => {
                           onChange={(e) => setCurrentPassword(e.target.value)}
                           value={currentPassword}
                         />
-                        {error.currentPassword && (
+                        {error.current_password && (
                           <span className="text-danger">
-                            *{error.currentPassword}
+                            *{error.current_password}
                           </span>
                         )}
                       </Form.Group>
@@ -269,7 +280,7 @@ const Profile = () => {
                           <span className="text-danger">*{error.password}</span>
                         )}
                       </Form.Group>
-                      {/* <Form.Group
+                      <Form.Group
                         className="mb-3"
                         controlId="passwordForm.ControlInput3"
                       >
@@ -278,13 +289,13 @@ const Profile = () => {
                           className="form-control-input"
                           type="password"
                           placeholder=""
-                          onChange={(e) => setPassword(e.target.value)}
-                          value={password}
+                          onChange={(e) => setConfirmPassword(e.target.value)}
+                          value={confirmPassword}
                         />
-                        {error.password && (
-                          <span className="text-danger">*{error.password}</span>
+                        {error.confirm_password && (
+                          <span className="text-danger">*{error.confirm_password}</span>
                         )}
-                      </Form.Group> */}
+                      </Form.Group>
                       <div className="d-flex justify-content-center mt-5">
                         <button className="profile-btn w-100">
                           တင်သွင်းသည်

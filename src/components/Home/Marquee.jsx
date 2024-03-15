@@ -1,10 +1,14 @@
 import React from 'react'
+import useFetch from '../../hooks/useFetch'
+import BASE_URL from '../../hooks/baseURL'
 
 const Marquee = () => {
+  const {data: bannerText} = useFetch(BASE_URL+'/bannerText');
+  // console.log(bannerText.text);
   return (
     <div>
       <marquee className='p-2 shadow-lg   text-light rounded-2 m-2 border border-warning '>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium quae saepe, alias ad maiores neque obcaecati ipsa adipisci eligendi, illo ut dicta, eaque quaerat ipsam ullam dolorum libero nulla amet.
+          {bannerText && bannerText.text}
       </marquee>
     </div>
   )

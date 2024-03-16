@@ -75,6 +75,13 @@ footer {
     }
 }
 
+@media screen and (max-width:615px) {
+    .gameImg {
+        height: 80px;
+        width: 100%;
+    }
+}
+
 @media screen and (max-width:580px) {
 
     .bannerImg {
@@ -83,6 +90,11 @@ footer {
 
     .tabTitle {
         padding: 0 5px;
+    }
+
+    .gameImg {
+        height: 70px;
+        width: 90%;
     }
 
 }
@@ -129,6 +141,21 @@ footer {
     }
 }
 
+@media screen and (max-width:370px) {
+    .gameImg {
+
+        width: 100%;
+    }
+}
+
+@media screen and (max-width:350px) {
+    .gameImg {
+        height: 70px;
+    }
+}
+
+
+
 @media screen and (max-width:340px) {
     .logo {
         font-size: 20px;
@@ -163,12 +190,20 @@ footer {
     }
 }
 
+@media screen and (max-width:304px) {
+    /* #left-tabs-example-tabpane-1 .col-6 {
+        width: 45% !important;
+    }
+
+    /* #left-tabs-example-tabpane-1 {
+        margin-left: 15px !important;
+    } */
+
+}
+
 @media screen and (max-width:300px) {
     .footerImg {
         height: 20px;
         width: 20px;
     }
-
-
-
 }

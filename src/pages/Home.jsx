@@ -6,7 +6,7 @@ import HomeTabs from '../components/Home/HomeTabs'
 
 const Home = () => {
   return (
-    <div className='px-1 container'>
+    <div className='px-2 px-sm-5'>
       <Carousel />
       <Marquee />
       <HomeTabs />

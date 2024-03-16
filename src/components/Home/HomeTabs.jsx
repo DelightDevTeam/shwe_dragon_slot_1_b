@@ -17,7 +17,7 @@ function HomeTabs() {
   const sports = games[2]?.products;
   const fishes = games[3]?.products;
   console.log(games);
-  
+
 
   // console.log(allplays[0]?.name);
 
@@ -66,15 +66,15 @@ function HomeTabs() {
   return (
     <Tab.Container id="left-tabs-example" defaultActiveKey={0}>
       <div className="mt-3">
-        <div className="row">
-          <div className="col-1">
+        <div className="d-flex " style={{ width: '100%' }}>
+          <div className="">
             <div>
               <Nav variant="pills" className="flex-column">
                 <Nav.Item>
                   <Nav.Link
                     className="border rounded-3 mb-1 py-0 py-sm-1 mb-sm-2 px-0 d-flex flex-column align-items-center "
                     eventKey={0}
-                    onClick={()=>setUrl(BASE_URL + "/allGameProducts")}
+                    onClick={() => setUrl(BASE_URL + "/allGameProducts")}
                   >
                     <img style={{ height: "35px" }} src={allGames} />
                     <span className="tabTitle text-center text-light">
@@ -86,7 +86,7 @@ function HomeTabs() {
                       return (
                         <Nav.Link
                           key={tab.id}
-                          onClick={()=>setUrl(BASE_URL+'/gameTypeProducts/'+tab.id)}
+                          onClick={() => setUrl(BASE_URL + '/gameTypeProducts/' + tab.id)}
                           className="border rounded-3 mb-2 py-0 py-sm-1 mb-sm-2 px-0 d-flex flex-column align-items-center "
                           eventKey={tab.id}
                         >
@@ -101,106 +101,106 @@ function HomeTabs() {
               </Nav>
             </div>
           </div>
-          <div className="col-11">
-                {
-                  loading && (
-                    <div className="text-center">
-                      <div className="spinner-border text-white" role="status">
-                        <span className="visually-hidden">Loading...</span>
-                      </div>
-                    </div>
-                  )
-                }
-              <div>
-                  <Tab.Pane className="row" eventKey={0}>
-                      <h3 className="text-white">{games[0]?.name}</h3>
-                        {slots && slots.map((product) => {
-                          return (
-                            <Link
-                              key={product.id}
-                              className="col-12 col-lg-3 col-xl-2  mb-1 mb-sm-4 btn"
-                              onClick={() => launchGame(games[0]?.code, product.code)}
-                            >
-                              <img
-                                className={`img-fluid rounded-3 shadow gameImg `}
-                                src={product.imgUrl}
-                              />
-                            </Link>
+          <div className=" ">
+            {
+              loading && (
+                <div className="text-center">
+                  <div className="spinner-border text-white" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              )
+            }
+            <div>
+              <Tab.Pane className="ms-1 row" eventKey={0}>
+                <h3 className="text-white">{games[0]?.name}</h3>
+                {slots && slots.map((product) => {
+                  return (
+                    <Link
+                      key={product.id}
+                      className="col-5  col-md-4 col-lg-3 col-xl-2  mb-1 mb-sm-4 btn"
+                      onClick={() => launchGame(games[0]?.code, product.code)}
+                    >
+                      <img
+                        className={`img-fluid rounded-3 shadow gameImg `}
+                        src={product.imgUrl}
+                      />
+                    </Link>
 
-                          );
-                        })}
-                      
-                      <h3 className="text-white mt-5">{games[1]?.name}</h3>
-                        {casinos && casinos.map((product) => {
-                          return (
-                            <Link
-                              key={product.id}
-                              className="col-12 col-lg-3 col-xl-2  mb-1 mb-sm-4 btn"
-                              onClick={() => launchGame(games[1]?.code, product.code)}
-                            >
-                              <img
-                                className={`img-fluid rounded-3 shadow gameImg `}
-                                src={product.imgUrl}
-                              />
-                            </Link>
+                  );
+                })}
 
-                          );
-                        })}
+                <h3 className="text-white mt-5">{games[1]?.name}</h3>
+                {casinos && casinos.map((product) => {
+                  return (
+                    <Link
+                      key={product.id}
+                      className="col-5  col-md-4 col-lg-3 col-xl-2  mb-1 mb-sm-4 btn"
+                      onClick={() => launchGame(games[1]?.code, product.code)}
+                    >
+                      <img
+                        className={`img-fluid rounded-3 shadow gameImg `}
+                        src={product.imgUrl}
+                      />
+                    </Link>
 
-                      <h3 className="text-white mt-5">{games[2]?.name}</h3>
-                        {sports && sports.map((product) => {
-                          return (
-                            <Link
-                              key={product.id}
-                              className="col-12 col-lg-3 col-xl-2  mb-1 mb-sm-4 btn"
-                              onClick={() => launchGame(games[2]?.code, product.code)}
-                            >
-                              <img
-                                className={`img-fluid rounded-3 shadow gameImg `}
-                                src={product.imgUrl}
-                              />
-                            </Link>
+                  );
+                })}
 
-                          );
-                        })}
+                <h3 className="text-white mt-5">{games[2]?.name}</h3>
+                {sports && sports.map((product) => {
+                  return (
+                    <Link
+                      key={product.id}
+                      className="col-5  col-md-4 col-lg-3 col-xl-2  mb-1 mb-sm-4 btn"
+                      onClick={() => launchGame(games[2]?.code, product.code)}
+                    >
+                      <img
+                        className={`img-fluid rounded-3 shadow gameImg `}
+                        src={product.imgUrl}
+                      />
+                    </Link>
 
-                      <h3 className="text-white mt-5">{games[3]?.name}</h3>
-                        {fishes && fishes.map((product) => {
-                          return (
-                            <Link
-                              key={product.id}
-                              className="col-12 col-lg-3 col-xl-2  mb-1 mb-sm-4 btn"
-                              onClick={() => launchGame(games[3]?.code, product.code)}
-                            >
-                              <img
-                                className={`img-fluid rounded-3 shadow gameImg `}
-                                src={product.imgUrl}
-                              />
-                            </Link>
+                  );
+                })}
 
-                          );
-                        })}
-                </Tab.Pane>
+                <h3 className="text-white mt-5">{games[3]?.name}</h3>
+                {fishes && fishes.map((product) => {
+                  return (
+                    <Link
+                      key={product.id}
+                      className="col-5  col-md-4 col-lg-3 col-xl-2  mb-1 mb-sm-4 btn"
+                      onClick={() => launchGame(games[3]?.code, product.code)}
+                    >
+                      <img
+                        className={`img-fluid rounded-3 shadow gameImg `}
+                        src={product.imgUrl}
+                      />
+                    </Link>
+
+                  );
+                })}
+              </Tab.Pane>
             </div>
             <div>
-                  <Tab.Pane className="row" eventKey={games?.id}>
-                    <h3 className="text-white">{games?.name}</h3>
-                        {products && products.map((product) => {
-                          return (
-                            <Link
-                              key={product.id}
-                              className="col-12 col-lg-3 col-xl-2  mb-1 mb-sm-4 btn"
-                              onClick={() => launchGame(games.code, product.code)}
-                            >
-                              <img
-                                className={`img-fluid rounded-3 shadow gameImg `}
-                                src={product.imgUrl}
-                              />
-                            </Link>
+              <Tab.Pane className=" ms-1 row" eventKey={games?.id}>
+                <h3 className="text-white">{games?.name}</h3>
+                {products && products.map((product) => {
+                  return (
+                    <Link
+                      key={product.id}
+                      className="col-5  col-md-4 col-lg-3 col-xl-2  mb-1 mb-sm-4 btn"
+                      onClick={() => launchGame(games.code, product.code)}
+                    >
+                      <img
+                        className={`img-fluid rounded-3 shadow gameImg `}
+                        src={product.imgUrl}
+                      />
+                    </Link>
 
-                          );
-                        })}
-                  </Tab.Pane>
+                  );
+                })}
+              </Tab.Pane>
             </div>
           </div>
         </div>

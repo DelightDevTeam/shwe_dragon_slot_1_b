@@ -76,55 +76,61 @@ function Login() {
   return (
     <>
       {!auth && (
-        <Form
-          noValidate
-          validated={validated}
-          className="px-md-0 w-75  mt-5 mx-auto"
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          {errorMessage && (
-            <div
-              className="alert alert-danger mt-2"
-              role="alert"
-              style={{ fontSize: "14px" }}
-            >
-              {errorMessage}
+          <div className="row">
+            <div className="col-md-6 offset-md-3">
+              <Form
+                noValidate
+                validated={validated}
+                className="w-75 mt-5 mx-auto"
+                onSubmit={handleSubmit(onSubmit)}
+              >
+                {errorMessage && (
+                  <div
+                    className="alert alert-danger mt-2"
+                    role="alert"
+                    style={{ fontSize: "14px" }}
+                  >
+                    {errorMessage}
+                  </div>
+                )}
+
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <Form.Label className="text-warning fw-bolder">
+                    Player Name
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Player Name..."
+                    {...register("user_name", {
+                      required: "Name is Required.",
+                    })}
+                    className={`${errors.name && "border-2 border-danger"}`}
+                  />
+                  <div className="error text-danger">{errors.name?.message}</div>
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                  <Form.Label className="text-warning fw-bolder">Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    placeholder="Password..."
+                    {...register("password", {
+                      required: "Password is Required.",
+                    })}
+                    className={`${errors.password && "border-2 border-danger"}`}
+                  />
+                  <div className="error text-danger">{errors.password?.message}</div>
+                </Form.Group>
+
+                <div className="text-center">
+                  <Button variant="warning" className="w-100 mt-4" type="submit">
+                    Login
+                  </Button>
+                </div>
+              </Form>
             </div>
-          )}
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label className="text-warning fw-bolder">
-              Player Name
-            </Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Player Name..."
-              {...register("user_name", {
-                required: "Name is Required.",
-              })}
-              className={`${errors.name && "border-2 border-danger"}`}
-            />
-            <div className="error text-danger">{errors.name?.message}</div>
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label className="text-warning fw-bolder">Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Password..."
-              {...register("password", {
-                required: "Password is Required.",
-              })}
-              className={`${errors.password && "border-2 border-danger"}`}
-            />
-            <div className="error text-danger">{errors.password?.message}</div>
-          </Form.Group>
-
-          <div className="text-center">
-            <Button variant="warning" className="w-50 mt-4" type="submit">
-              Login
-            </Button>
           </div>
-        </Form>
+
       )}
     </>
   );

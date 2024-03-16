@@ -3,6 +3,9 @@ import home from '../../assets/img/footerIcons/home.png';
 import promo from '../../assets/img/footerIcons/promo.png';
 import livechat from '../../assets/img/footerIcons/livechat.png';
 import wallet from '../../assets/img/footerIcons/wallet.png';
+import history from '../../assets/img/history.png';
+import summary from '../../assets/img/summary.png';
+
 import profile from '../../assets/img/footerIcons/account.png';
 import { NavLink } from 'react-router-dom';
 
@@ -10,11 +13,11 @@ const Footer = () => {
   const footerIcons = [
     { img: home, title: 'Home', link: '/' },
     { img: promo, title: 'Promotion', link: '/promotion' },
-    { img: wallet, title: 'Deposit', link: '/deposit' },
-    { img: profile, title: 'Profile', link: '/profile' },
+    { img: history, title: 'History', link: '/history' },
+    { img: summary, title: 'Game Log', link: '/game-log' },
   ];
   return (
-    <footer className=' rounded-top-5 px-2 px-sm-5 py-3 fixed-bottom   z-3 d-flex  align-items-center justify-content-between  '>
+    <footer className=' rounded-top-5 px-3 px-sm-5 py-3 fixed-bottom   z-3 d-flex  align-items-center justify-content-between  '>
       {footerIcons.map((item, index) => {
         return (
           <NavLink
@@ -32,6 +35,7 @@ const Footer = () => {
         );
       })}
     </footer>
+
   );
 };
 

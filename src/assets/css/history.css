@@ -1,0 +1,36 @@
+.customTabs {
+    background: #a9aeb2;
+    border-radius: 10px;
+    padding: 5px 5px !important;
+    box-sizing: border-box !important;
+    width: 90%;
+
+}
+
+.customTabs .nav-link {
+    color: #000 !important;
+    padding: 4px 10px !important;
+    font-weight: 600;
+}
+
+.customTabs .nav-link:hover {
+    border: none !important;
+}
+
+.customTabs .nav-link.active {
+    color: #0d6efd !important;
+    border-radius: 8px !important;
+
+}
+
+@media screen and (max-width:460px) {
+    .customTabs .nav-link {
+        font-size: 13px;
+    }
+
+    th,
+    td {
+        font-size: 13px;
+    }
+
+}

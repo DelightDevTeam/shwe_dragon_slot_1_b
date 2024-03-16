@@ -12,6 +12,7 @@ export default function Games() {
     }
   }, []);
   let product_id = localStorage.getItem("product_id");
+  let product_code = localStorage.getItem("product_code");
   let gameTypeId = localStorage.getItem("gameType_id");
   let gameTitle = localStorage.getItem("title");
   let authUser = JSON.parse(localStorage.getItem("authUser"));
@@ -31,7 +32,7 @@ export default function Games() {
     const gameData = {
       "MemberName" : user.user_name,
       "password" : "password",
-      "productId" : product_id,
+      "productId" : product_code,
       "gameType" : gameTypeId,
       "LanguageCode" : "1",
       "Platform" : "0"
@@ -76,7 +77,7 @@ export default function Games() {
                 {auth && (
                   <>
                     <div
-                      onClick={() => launchGame(game.code)}
+                      onClick={() => launchGame()}
                       style={{ cursor: "pointer" }}
                     >
                       <img

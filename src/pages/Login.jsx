@@ -50,6 +50,7 @@ function Login() {
         // console.log(responseData);
         if (responseData) {
           const userData = responseData.data.user;
+          // console.log(userData);
           localStorage.setItem("authToken", responseData.data.token);
           localStorage.setItem(
             "authUser",

@@ -11,9 +11,12 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import useFetch from '../../hooks/useFetch'
+import BASE_URL from '../../hooks/baseURL'
 
 const Carousel = () => {
-    const banners=[b1,b2,b3,b4,b6];
+  const {data: banners} = useFetch(BASE_URL+"/banner");
+    // const banners=[b1,b2,b3,b4,b6];
   return (
     <Swiper
     spaceBetween={50}
@@ -28,9 +31,9 @@ const Carousel = () => {
       navigation={true}
       modules={[Autoplay, Pagination, Navigation]}
   >
-    {banners.map((banner,i)=>{
+    {banners && banners.map((banner,i)=>{
         return  <SwiperSlide key={i}>
-            <img className='bannerImg' src={banner} />
+            <img className='bannerImg' src={banner.img_url} />
         </SwiperSlide>
 
     })}

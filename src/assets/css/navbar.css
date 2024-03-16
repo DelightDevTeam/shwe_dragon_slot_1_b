@@ -1,0 +1,33 @@
+.logoTitle {
+    margin-top: 5px;
+    font-size: 18px;
+}
+
+.logo img {
+    border-radius: 10px;
+    border: 1px solid #011119;
+}
+
+@media screen and (max-width:620px) {
+    .logoTitle {
+        font-size: 15px;
+    }
+
+    .logo img {
+        width: 40px;
+    }
+
+    .logoIcon i {
+        font-size: 16px !important;
+    }
+}
+
+@media screen and (max-width:360px) {
+    .logoIcon i {
+        font-size: 14px !important;
+    }
+
+    .userText {
+        font-size: 12px;
+    }
+}

@@ -114,16 +114,16 @@ function HomeTabs() {
               <div>
                   <Tab.Pane className="row" eventKey={0}>
                       <h3 className="text-white">{games[0]?.name}</h3>
-                        {slots && slots.map((game) => {
+                        {slots && slots.map((product) => {
                           return (
                             <Link
-                              key={game.id}
+                              key={product.id}
                               className="col-12 col-lg-3 col-xl-2  mb-1 mb-sm-4 btn"
-                              onClick={() => launchGame(games.id, game.code)}
+                              onClick={() => launchGame(games[0]?.code, product.code)}
                             >
                               <img
                                 className={`img-fluid rounded-3 shadow gameImg `}
-                                src={game.imgUrl}
+                                src={product.imgUrl}
                               />
                             </Link>
 
@@ -131,16 +131,16 @@ function HomeTabs() {
                         })}
                       
                       <h3 className="text-white mt-5">{games[1]?.name}</h3>
-                        {casinos && casinos.map((game) => {
+                        {casinos && casinos.map((product) => {
                           return (
                             <Link
-                              key={game.id}
+                              key={product.id}
                               className="col-12 col-lg-3 col-xl-2  mb-1 mb-sm-4 btn"
-                              onClick={() => launchGame(games.id, game.code)}
+                              onClick={() => launchGame(games[1]?.code, product.code)}
                             >
                               <img
                                 className={`img-fluid rounded-3 shadow gameImg `}
-                                src={game.imgUrl}
+                                src={product.imgUrl}
                               />
                             </Link>
 
@@ -148,16 +148,16 @@ function HomeTabs() {
                         })}
 
                       <h3 className="text-white mt-5">{games[2]?.name}</h3>
-                        {sports && sports.map((game) => {
+                        {sports && sports.map((product) => {
                           return (
                             <Link
-                              key={game.id}
+                              key={product.id}
                               className="col-12 col-lg-3 col-xl-2  mb-1 mb-sm-4 btn"
-                              onClick={() => launchGame(games.id, game.code)}
+                              onClick={() => launchGame(games[2]?.code, product.code)}
                             >
                               <img
                                 className={`img-fluid rounded-3 shadow gameImg `}
-                                src={game.imgUrl}
+                                src={product.imgUrl}
                               />
                             </Link>
 
@@ -165,16 +165,16 @@ function HomeTabs() {
                         })}
 
                       <h3 className="text-white mt-5">{games[3]?.name}</h3>
-                        {fishes && fishes.map((game) => {
+                        {fishes && fishes.map((product) => {
                           return (
                             <Link
-                              key={game.id}
+                              key={product.id}
                               className="col-12 col-lg-3 col-xl-2  mb-1 mb-sm-4 btn"
-                              onClick={() => launchGame(games.id, game.code)}
+                              onClick={() => launchGame(games[3]?.code, product.code)}
                             >
                               <img
                                 className={`img-fluid rounded-3 shadow gameImg `}
-                                src={game.imgUrl}
+                                src={product.imgUrl}
                               />
                             </Link>
 
@@ -185,16 +185,16 @@ function HomeTabs() {
             <div>
                   <Tab.Pane className="row" eventKey={games?.id}>
                     <h3 className="text-white">{games?.name}</h3>
-                        {products && products.map((game) => {
+                        {products && products.map((product) => {
                           return (
                             <Link
-                              key={game.id}
+                              key={product.id}
                               className="col-12 col-lg-3 col-xl-2  mb-1 mb-sm-4 btn"
-                              onClick={() => launchGame(games.id, game.code)}
+                              onClick={() => launchGame(games.code, product.code)}
                             >
                               <img
                                 className={`img-fluid rounded-3 shadow gameImg `}
-                                src={game.imgUrl}
+                                src={product.imgUrl}
                               />
                             </Link>
 

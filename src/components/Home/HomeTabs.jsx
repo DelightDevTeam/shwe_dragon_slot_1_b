@@ -11,8 +11,12 @@ function HomeTabs() {
   const { data: gameTypes } = useFetch(BASE_URL + "/gameType");
   const [url, setUrl] = useState(BASE_URL + "/allGameProducts");
   const { data: games, loading } = useFetch(url);
-  const {data: allplays} = useFetch(BASE_URL + "/allGameProducts");
   const products = games.products;
+  const slots = games[0]?.products;
+  const casinos = games[1]?.products;
+  const sports = games[2]?.products;
+  const fishes = games[3]?.products;
+  console.log(games);
   
 
   // console.log(allplays[0]?.name);
@@ -70,6 +74,7 @@ function HomeTabs() {
                   <Nav.Link
                     className="border rounded-3 mb-1 py-0 py-sm-1 mb-sm-2 px-0 d-flex flex-column align-items-center "
                     eventKey={0}
+                    onClick={()=>setUrl(BASE_URL + "/allGameProducts")}
                   >
                     <img style={{ height: "35px" }} src={allGames} />
                     <span className="tabTitle text-center text-light">
@@ -108,11 +113,8 @@ function HomeTabs() {
                 }
               <div>
                   <Tab.Pane className="row" eventKey={0}>
-                  {
-                    allplays && allplays.map((game, index)=>{
-                      <div key={index}>
-                        <h3 className="text-white">{game.name}</h3>
-                        {/* {game.products && game.products.map((game) => {
+                      <h3 className="text-white">{games[0]?.name}</h3>
+                        {slots && slots.map((game) => {
                           return (
                             <Link
                               key={game.id}
@@ -124,13 +126,60 @@ function HomeTabs() {
                                 src={game.imgUrl}
                               />
                             </Link>
-                          );
-                        })} */}
-                      </div>
-                    })
-                  }
-                        
 
+                          );
+                        })}
+                      
+                      <h3 className="text-white mt-5">{games[1]?.name}</h3>
+                        {casinos && casinos.map((game) => {
+                          return (
+                            <Link
+                              key={game.id}
+                              className="col-12 col-lg-3 col-xl-2  mb-1 mb-sm-4 btn"
+                              onClick={() => launchGame(games.id, game.code)}
+                            >
+                              <img
+                                className={`img-fluid rounded-3 shadow gameImg `}
+                                src={game.imgUrl}
+                              />
+                            </Link>
+
+                          );
+                        })}
+
+                      <h3 className="text-white mt-5">{games[2]?.name}</h3>
+                        {sports && sports.map((game) => {
+                          return (
+                            <Link
+                              key={game.id}
+                              className="col-12 col-lg-3 col-xl-2  mb-1 mb-sm-4 btn"
+                              onClick={() => launchGame(games.id, game.code)}
+                            >
+                              <img
+                                className={`img-fluid rounded-3 shadow gameImg `}
+                                src={game.imgUrl}
+                              />
+                            </Link>
+
+                          );
+                        })}
+
+                      <h3 className="text-white mt-5">{games[3]?.name}</h3>
+                        {fishes && fishes.map((game) => {
+                          return (
+                            <Link
+                              key={game.id}
+                              className="col-12 col-lg-3 col-xl-2  mb-1 mb-sm-4 btn"
+                              onClick={() => launchGame(games.id, game.code)}
+                            >
+                              <img
+                                className={`img-fluid rounded-3 shadow gameImg `}
+                                src={game.imgUrl}
+                              />
+                            </Link>
+
+                          );
+                        })}
                 </Tab.Pane>
             </div>
             <div>
@@ -163,53 +212,3 @@ function HomeTabs() {
 }
 
 export default HomeTabs;
-
-// const AllGamesContent = () => {
-//   const sports = [sports2, sport3, sport4];
-//   // {id:2,imgs:[esport1,esport1,esport1]},
-//   const casinos = [casino1, casino2, casino3, casino4];
-//   const slots = [slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8];
-//   return (
-//     <div className="ms-1">
-//       <div className="mb-5 ">
-//         <h3 className="text-white mb-3">Slots</h3>
-//         <div className="row">
-//           {slots.map((img) => {
-//             return (
-//               <img
-//                 className="img-fluid gameImg col-6  col-lg-4 col-xl-3  mb-1 mb-sm-4 "
-//                 src={img}
-//               />
-//             );
-//           })}
-//         </div>
-//       </div>
-//       <div className="mb-5 ">
-//         <h3 className="text-white mb-3">Sports</h3>
-//         <div className="row">
-//           {sports.map((img) => {
-//             return (
-//               <img
-//                 className=" col-6  col-lg-4  col-xl-3  mb-1 mb-sm-4  img-fluid gameImg"
-//                 src={img}
-//               />
-//             );
-//           })}
-//         </div>
-//       </div>
-//       <div className="mb-5 ">
-//         <h3 className="text-white mb-3">Live-Casinos</h3>
-//         <div className="row">
-//           {casinos.map((img) => {
-//             return (
-//               <img
-//                 className="col-6 col-lg-4 col-xl-3  mb-2 mb-sm-4 img-fluid gameImg"
-//                 src={img}
-//               />
-//             );
-//           })}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };

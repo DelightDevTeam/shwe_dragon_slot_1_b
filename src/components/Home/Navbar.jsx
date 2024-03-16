@@ -14,14 +14,14 @@ const Navbar = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [smallLoad, setSmallLoad] = useState(false);
-  
+
   const navigate = useNavigate();
 
   // const [auth, setAuth] = useState();
   const auth = localStorage.getItem("authToken");
   const url = auth ? `${BASE_URL}/user` : "";
-  const {data: authUser} = useFetch(url);
-  
+  const { data: authUser } = useFetch(url);
+
   const [user, setUser] = useState(authUser);
   // const user = authUser;
 
@@ -41,7 +41,7 @@ const Navbar = () => {
 
 
   return (
-    <div className="border-bottom py-1 py-md-2 px-2 px-md-5 d-flex flex-wrap align-items-center justify-content-start justify-content-sm-between">
+    <div className="border-bottom py-1 py-md-2 px-2 px-md-5 d-flex flex-wrap align-items-center   justify-content-between">
       <NavLink className="text-decoration-none d-flex navLogo align-items-center " to={"/"}>
         <h2 className="logo mt-1  " style={{ color: "gold" }}>
           <img src={logo} width={45} alt="" />

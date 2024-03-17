@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Modal, Table } from "react-bootstrap";
-import logo from "../../assets/img/logo.png";
+import logo from "../../assets/img/logo1.png";
 import axios from "axios";
 import BASE_URL from "../../hooks/baseURL";
 import '../../assets/css/navbar.css';
@@ -14,14 +14,14 @@ const Navbar = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [smallLoad, setSmallLoad] = useState(false);
-  
+
   const navigate = useNavigate();
 
   // const [auth, setAuth] = useState();
   const auth = localStorage.getItem("authToken");
   const url = auth ? `${BASE_URL}/user` : "";
-  const {data: authUser} = useFetch(url);
-  
+  const { data: authUser } = useFetch(url);
+
   const [user, setUser] = useState(authUser);
   // const user = authUser;
 
@@ -41,12 +41,12 @@ const Navbar = () => {
 
 
   return (
-    <div className="border-bottom py-1 py-md-2 px-2 px-md-5 d-flex flex-wrap align-items-center justify-content-start justify-content-sm-between">
+    <div className="border-bottom py-1 py-md-2 px-2 px-md-5 d-flex flex-wrap align-items-center   justify-content-between">
       <NavLink className="text-decoration-none d-flex navLogo align-items-center " to={"/"}>
         <h2 className="logo mt-1  " style={{ color: "gold" }}>
           <img src={logo} width={45} alt="" />
         </h2>
-        <h5 className=' logoTitle ms-2 text-light'>Dragon City</h5>
+        <h5 className=' logoTitle ms-2 text-light'>Max Win</h5>
       </NavLink>
       {window.location.pathname === '/' ? <div className="logoIcon d-flex gap-2 gap-sm-4 align-items-center text-white">
         {auth && (

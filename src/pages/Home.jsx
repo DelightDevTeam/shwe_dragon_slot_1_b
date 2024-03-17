@@ -6,9 +6,10 @@ import HomeTabs from '../components/Home/HomeTabs'
 
 const Home = () => {
   return (
-    <div className='px-1 px-xl-5'>
-      <Carousel />
+    <div className='px-2 px-sm-5'>
       <Marquee />
+      <Carousel />
+
       <HomeTabs />
     </div>
   )

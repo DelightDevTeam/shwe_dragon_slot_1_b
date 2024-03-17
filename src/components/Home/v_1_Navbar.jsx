@@ -1,130 +1,113 @@
 import React, { useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { Modal, Table } from 'react-bootstrap';
+import logo from '../../assets/img/logo1.png';
+import axios from 'axios';
+import BASE_URL from '../../hooks/baseURL';
+import '../../assets/css/navbar.css';
+import useFetch from '../../hooks/useFetch';
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
-
+  const [wallets, setWallets] = useState();
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [smallLoad, setSmallLoad] = useState(false);
 
-  const [auth, setAuth] = useState();
+  const navigate = useNavigate();
+
+  // const [auth, setAuth] = useState();
+  const auth = localStorage.getItem('authToken');
+  const url = auth ? `${BASE_URL}/user` : '';
+  const { data: authUser } = useFetch(url);
+
+  const [user, setUser] = useState(authUser);
+  // const user = authUser;
 
   useEffect(() => {
-    setAuth(localStorage.getItem('authToken'));
-  }, []);
+    setUser(authUser);
+  }, [authUser]);
 
-  const modals = [
-    { id: 1, title: 'MBBET', value: '0.00' },
-    { id: 2, title: 'WBET', value: '0.00' },
-    { id: 3, title: 'EVOLUTION GAMING', value: '0.00' },
-    { id: 4, title: 'KING855', value: '0.00' },
-    { id: 5, title: 'SA GAMING', value: '0.00' },
-    { id: 6, title: 'WM CASINO', value: '0.00' },
-    { id: 7, title: 'YEEBET', value: '0.00' },
-    { id: 1, title: 'DRAGON SOFT', value: '0.00' },
-    { id: 2, title: 'EVOPLAY', value: 'maintainance' },
-    { id: 3, title: 'GAMEPLAY', value: '0.00' },
-    { id: 4, title: 'JOKER', value: '0.00' },
-    { id: 5, title: 'MICROGAMING', value: '0.00' },
-    { id: 6, title: 'PG SOFT', value: '0.00' },
-    { id: 7, title: 'PNG', value: '0.00' },
-    { id: 2, title: 'PRAGEMIC', value: 'maintainance' },
-    { id: 3, title: 'SIMPLEPLAY', value: '0.00' },
-    { id: 4, title: 'DIGMANN', value: '0.00' },
-    { id: 5, title: 'ALLBET', value: '0.00' },
-    { id: 6, title: 'LIVE22', value: '0.00' },
-    { id: 7, title: 'Pinnacle', value: '0.00' },
-    { id: 2, title: 'RCB988', value: 'maintainance' },
-    { id: 3, title: 'SBO', value: '0.00' },
-    { id: 4, title: 'ROYAL SLOT', value: '0.00' },
-    { id: 5, title: 'ADVANTPLAY', value: '0.00' },
-    { id: 6, title: 'JILI', value: '0.00' },
-    { id: 7, title: 'SEXY BACCARAT', value: '0.00' },
-  ];
+  // console.log(user);
+  const balance = user?.balance;
+  const formattedBalance =
+    user && balance ? parseFloat(balance).toLocaleString() : '';
+
+  const logout = () => {
+    // Your logout logic here
+    localStorage.removeItem('authToken');
+    navigate('/');
+  };
+
   return (
-    <div
-      style={{ cursor: 'pointer' }}
-      className='border-bottom  py-sm-1 py-3 px-2 px-sm-5  d-flex flex-wrap align-items-center  justify-content-between '
-    >
-      <NavLink className='text-decoration-none ' to={'/'}>
-        <h2 className='logo mt-1' style={{ color: 'gold' }}>
-          Max Win
+    <div className='border-bottom py-1 py-md-2 px-2 px-md-5 d-flex flex-wrap align-items-center   justify-content-between'>
+      <NavLink
+        className='text-decoration-none d-flex navLogo align-items-center '
+        to={'/'}
+      >
+        <h2 className='logo mt-1  ' style={{ color: 'gold' }}>
+          <img src={logo} width={45} alt='' />
         </h2>
+        <h5 className=' logoTitle ms-2 text-light'>Max Win</h5>
       </NavLink>
-      <div className='d-flex gap-2  gap-sm-4 align-items-center '>
-        {/*  Login And Register Btn
-        <button className=' btn me-4 btn-outline-warning  text-uppercase fw-bold px-5'>Login</button>
-        <button className='btn btn-warning   text-uppercase fw-bold px-5'>Register</button>
-        */}
-        <button
-          className='border border-none bg-transparent'
-          style={{ outline: 'none' }}
-          onClick={handleShow}
-        >
-          <i className=' fa-solid fa-wallet text-light '></i>
-        </button>
-        <div className='text-light d-flex align-items-center flex-nowrap '>
-          <i className='fa-solid fa-life-ring text-light'></i>
-          <span className='mx-2 fw-bolder '>: 0</span>
+      {window.location.pathname === '/' ? (
+        <div className='logoIcon d-flex gap-2 gap-sm-4 align-items-center text-white'>
+          {auth && (
+            <div>
+              {/* <i class='fa-solid fa-user'></i> */}
+              <NavLink to={'/profile'}>
+                <i className='fa-solid fa-user text-light'></i>
+              </NavLink>
+              <span className=' userText fw-bold ms-1 me-1 ms-sm-2 me-sm-2'>
+                ID :
+              </span>
+              <span className='userText'>{user?.user_name}</span>
+            </div>
+          )}
+          {auth && (
+            <div className='d-flex gap-1 gap-sm-2   align-items-center text-white'>
+              {/* <button className="bg-transparent btn" style={{ outline: "none" }}> */}
+              <i className='fa-solid fa-wallet text-light'></i>
+              {/* </button> */}
+
+              <div>
+                <span className='userText'>{formattedBalance} MMK</span>
+              </div>
+            </div>
+          )}
+          {auth && (
+            <>
+              {/* <NavLink to={'/profile'}>
+              <i className='fa-solid fa-user text-light'></i>
+            </NavLink> */}
+              <button className='btn' onClick={logout}>
+                <i className='fa-solid fa-right-from-bracket text-light'></i>
+              </button>
+            </>
+          )}
+          {!auth && (
+            <>
+              <NavLink to={'/login'}>
+                <button
+                  style={{
+                    border: '2px solid #FFD700',
+                    background: 'none',
+                    fontSize: '13px',
+                    color: '#FFD700',
+                    padding: '6px 30px',
+                  }}
+                  className='ms-2 bg-none rounded-2'
+                >
+                  LOGIN
+                </button>
+              </NavLink>
+            </>
+          )}
         </div>
-
-        <NavLink to={'/profile'}>
-          <i className='fa-solid fa-user  text-light'></i>
-        </NavLink>
-        {/* <NavLink to={'/incomeletter'}><i   class="fa-solid fa-comment-dots text-light"></i></NavLink> */}
-
-        {auth && (
-          <button className='btn'>
-            <i className='fa-solid fa-right-from-bracket text-light'></i>
-          </button>
-        )}
-
-        {/* <NavLink to={"/incomeletter"}>
-          <i class="fa-solid fa-comment-dots text-light"></i>
-        </NavLink> */}
-        {/* <i class="fa-solid fa-right-from-bracket text-light"></i> */}
-        {!auth && (
-          <NavLink to={'/login'}>
-            <button
-              style={{
-                border: '2px solid #FFD700',
-                background: 'none',
-                fontSize: '13px',
-                color: '#FFD700',
-                padding: '6px 30px',
-              }}
-              className='bg-none rounded-2 '
-            >
-              LOGIN
-            </button>
-          </NavLink>
-        )}
-      </div>
-      <Modal show={show} onHide={handleClose} animation={false}>
-        <Modal.Header closeButton>
-          <Modal.Title></Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Table striped bordered className='table-dark'>
-            <thead>
-              <tr>
-                <th>ပင်မ ပိုက်ဆံအိတ်</th>
-                <th>0.00</th>
-              </tr>
-            </thead>
-            <tbody>
-              {modals.map((modal) => (
-                <tr key={modal.id}>
-                  <td>{modal.title}</td>
-                  <td>{modal.value}</td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </Modal.Body>
-      </Modal>
+      ) : (
+        ''
+      )}
     </div>
   );
 };

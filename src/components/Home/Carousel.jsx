@@ -10,15 +10,18 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import '../../assets/css/carousel.css';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import useFetch from '../../hooks/useFetch';
 import BASE_URL from '../../hooks/baseURL';
+import Marquee from './Marquee';
 
 const Carousel = () => {
   const { data: banners } = useFetch(BASE_URL + '/banner');
   // const banners=[b1,b2,b3,b4,b6];
   return (
     <Swiper
+      className='mySwiper'
       spaceBetween={50}
       slidesPerView={1}
       autoplay={{
@@ -39,6 +42,11 @@ const Carousel = () => {
             </SwiperSlide>
           );
         })}
+      <div className='row'>
+        <div className='col-12'>
+          <Marquee />
+        </div>
+      </div>
     </Swiper>
   );
 };

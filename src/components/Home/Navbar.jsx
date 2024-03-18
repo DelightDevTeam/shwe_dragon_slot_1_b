@@ -41,7 +41,10 @@ const Navbar = () => {
   };
 
   return (
-    <div className='border-bottom py-1 py-md-2 px-2 px-md-5 d-flex flex-wrap align-items-center   justify-content-between fixed-top'>
+    <div
+      className='border-bottom py-1 py-md-2 px-2 px-md-5 d-flex flex-wrap align-items-center   justify-content-between fixed-top text-white'
+      style={{ borderRadius: '10px', backgroundColor: '#098ac6' }}
+    >
       <NavLink
         className='text-decoration-none d-flex navLogo align-items-center '
         to={'/'}

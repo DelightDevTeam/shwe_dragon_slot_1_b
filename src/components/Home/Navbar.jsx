@@ -41,77 +41,142 @@ const Navbar = () => {
   };
 
   return (
+    <>
     <div
-      className='border-bottom py-1 py-md-2 px-2 px-md-5 d-flex flex-wrap align-items-center justify-content-between sticky-top text-white'
+      className='container border-bottom py-1 py-md-2 sticky-top text-white'
       style={{ borderRadius: '10px', backgroundColor: '#00354D' }}
     >
-      <NavLink
-        className='text-decoration-none d-flex navLogo align-items-center '
-        to={'/'}
-      >
-        <h2 className='logo mt-1  ' style={{ color: 'gold' }}>
-          <img src={logo} width={45} alt='' />
-        </h2>
-        <h5 className=' logoTitle ms-2 text-light'>Max Win</h5>
-      </NavLink>
-      {window.location.pathname === '/' ? (
-        <div className='logoIcon d-flex gap-2 gap-sm-4 align-items-center text-white'>
-          {auth && (
-            <div>
-              {/* <i class='fa-solid fa-user'></i> */}
-              <NavLink to={'/profile'}>
-                <i className='fa-solid fa-user text-light'></i>
-              </NavLink>
-              <span className=' userText fw-bold ms-1 me-1 ms-sm-2 me-sm-2'>
-                ID :
-              </span>
-              <span className='userText'>{user?.user_name}</span>
-            </div>
-          )}
-          {auth && (
-            <div className='d-flex gap-1 gap-sm-2   align-items-center text-white'>
-              {/* <button className="bg-transparent btn" style={{ outline: "none" }}> */}
-              <i className='fa-solid fa-wallet text-light'></i>
-              {/* </button> */}
-
-              <div>
-                <span className='userText'>{formattedBalance} MMK</span>
-              </div>
-            </div>
-          )}
-          {auth && (
-            <>
-              {/* <NavLink to={'/profile'}>
-              <i className='fa-solid fa-user text-light'></i>
-            </NavLink> */}
-              <button className='btn' onClick={logout}>
-                <i className='fa-solid fa-right-from-bracket text-light'></i>
-              </button>
-            </>
-          )}
-          {!auth && (
-            <>
-              <NavLink to={'/login'}>
-                <button
-                  style={{
-                    border: '2px solid #FFD700',
-                    background: 'none',
-                    fontSize: '13px',
-                    color: '#FFD700',
-                    padding: '6px 30px',
-                  }}
-                  className='ms-2 bg-none rounded-2'
-                >
-                  LOGIN
+      <div className='d-flex flex-wrap align-items-center justify-content-between'>
+        <NavLink
+          className='text-decoration-none d-flex navLogo align-items-center '
+          to={'/'}
+        >
+          <h2 className='logo mt-1  ' style={{ color: 'gold' }}>
+            <img src={logo} width={45} alt='' />
+          </h2>
+          <h5 className=' logoTitle ms-2 text-light'>Max Win</h5>
+        </NavLink>
+        {auth && (
+              <>
+                <button className='btn d-block d-md-none' onClick={logout}>
+                  <i className='fa-solid fa-right-from-bracket text-light'></i>
                 </button>
-              </NavLink>
-            </>
-          )}
+              </>
+        )}
+        {window.location.pathname === '/' ? (
+          <div className="text-end d-none d-md-block">
+            <div className='logoIcon d-flex justify-content-center align-items-center gap-2 text-white'>
+              {auth && (
+                <div>
+                  {/* <i class='fa-solid fa-user'></i> */}
+                  <NavLink to={'/profile'}>
+                    <i className='fa-solid fa-user text-light'></i>
+                  </NavLink>
+                  <span className=' userText fw-bold ms-1 me-1 ms-sm-2 me-sm-2 text-end'>
+                    ID :
+                  </span>
+                  <span className='userText text-end'>{user?.user_name}</span>
+                </div>
+              )}
+              {auth && (
+                <div className='d-flex gap-1 gap-sm-2 align-items-center justify-content-end text-white'>
+                  {/* <button className="bg-transparent btn" style={{ outline: "none" }}> */}
+                  <i className='fa-solid fa-wallet text-light'></i>
+                  {/* </button> */}
+
+                  <div>
+                    <span className='userText text-end'>{formattedBalance} MMK</span>
+                  </div>
+                </div>
+              )}
+              {auth && (
+                <>
+                  <button className='btn d-none d-md-block' onClick={logout}>
+                    <i className='fa-solid fa-right-from-bracket text-light'></i>
+                  </button>
+                </>
+              )}
+              {!auth && (
+                <>
+                  <NavLink to={'/login'}>
+                    <button
+                      style={{
+                        border: '2px solid #FFD700',
+                        background: 'none',
+                        fontSize: '13px',
+                        color: '#FFD700',
+                        padding: '6px 30px',
+                      }}
+                      className='ms-2 bg-none rounded-2'
+                    >
+                      LOGIN
+                    </button>
+                  </NavLink>
+                </>
+              )}
+            </div>
+          </div>
+
+        ) : (
+          ''
+        )}
+      </div>
+        <div className="d-block d-md-none">
+          <div className='logoIcon d-flex justify-content-between align-items-center gap-2 text-white'>
+            {auth && (
+              <div>
+                {/* <i class='fa-solid fa-user'></i> */}
+                <NavLink to={'/profile'}>
+                  <i className='fa-solid fa-user text-light'></i>
+                </NavLink>
+                <span className=' userText fw-bold ms-1 me-1 ms-sm-2 me-sm-2 text-end'>
+                  ID :
+                </span>
+                <span className='userText text-end'>{user?.user_name}</span>
+              </div>
+            )}
+            {auth && (
+              <div className='d-flex gap-1 gap-sm-2 align-items-center justify-content-end text-white'>
+                {/* <button className="bg-transparent btn" style={{ outline: "none" }}> */}
+                <i className='fa-solid fa-wallet text-light'></i>
+                {/* </button> */}
+
+                <div>
+                  <span className='userText text-end'>{formattedBalance} MMK</span>
+                </div>
+              </div>
+            )}
+            {auth && (
+              <>
+                <button className='btn d-none d-md-block' onClick={logout}>
+                  <i className='fa-solid fa-right-from-bracket text-light'></i>
+                </button>
+              </>
+            )}
+            {!auth && (
+              <>
+                <NavLink to={'/login'}>
+                  <button
+                    style={{
+                      border: '2px solid #FFD700',
+                      background: 'none',
+                      fontSize: '13px',
+                      color: '#FFD700',
+                      padding: '6px 30px',
+                    }}
+                    className='ms-2 bg-none rounded-2'
+                  >
+                    LOGIN
+                  </button>
+                </NavLink>
+              </>
+            )}
+          </div>
         </div>
-      ) : (
-        ''
-      )}
     </div>
+
+    </>
+
   );
 };
 

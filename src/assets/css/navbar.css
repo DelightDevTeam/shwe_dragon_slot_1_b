@@ -7,6 +7,9 @@
     border-radius: 10px;
     border: 1px solid #011119;
 }
+.logoIcon{
+    text-align: right;
+}
 
 @media screen and (max-width:620px) {
     .logoTitle {
@@ -20,6 +23,7 @@
     .logoIcon i {
         font-size: 16px !important;
     }
+
 }
 
 @media screen and (max-width:360px) {
@@ -29,5 +33,6 @@
 
     .userText {
         font-size: 12px;
+        text-align: right;
     }
 }

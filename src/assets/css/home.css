@@ -37,14 +37,17 @@ body {
 /* sidebar */
 
 .gameImg {
-  /* height: 100px; */
-  /* width: 200px; */
+  /* height: 100px;
+  width: 200px; */
   width: 100%;
 }
 
 footer {
-  background: linear-gradient(0deg, #02293a, #00354d);
-  box-shadow: 0 -5px 10px #0000004d;
+  /* background: linear-gradient(0deg, #02293a, #00354d);
+  box-shadow: 0 -5px 10px #0000004d; */
+  background-color: #00354D;
+  /* z-index: 100000; */
+
 }
 
 .footerImg {

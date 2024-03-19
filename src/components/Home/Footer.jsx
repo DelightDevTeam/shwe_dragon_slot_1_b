@@ -17,7 +17,8 @@ const Footer = () => {
     { img: summary, title: 'Game Log', link: '/game-log' },
   ];
   return (
-    <footer className=' rounded-top-5 px-3 px-sm-5 py-3 fixed-bottom   z-3 d-flex  align-items-center justify-content-between mt-5'>
+    <footer 
+    className='rounded-top-5 px-3 px-sm-5 py-3 fixed-bottom d-flex align-items-center justify-content-between mt-5 shadow-lg'>
       {footerIcons.map((item, index) => {
         return (
           <NavLink

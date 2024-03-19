@@ -4,6 +4,13 @@ import '../assets/css/history.css'
 import useFetch from '../hooks/useFetch'
 import BASE_URL from '../hooks/baseURL'
 const HistoryPage = () => {
+    let auth = localStorage.getItem("authToken");
+    useEffect(() => {
+        if (!auth) {
+          navigate("/login");
+        }
+      }, [navigate]);
+
     const [url, setUrl] = useState("/transactions?type=");
     const [param, setParam] = useState("today");
     const {data: logs, loading, error} = useFetch(BASE_URL+url+param);

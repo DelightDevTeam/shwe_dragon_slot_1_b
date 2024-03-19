@@ -5,6 +5,13 @@ import useFetch from '../hooks/useFetch'
 import BASE_URL from '../hooks/baseURL'
 
 const GameLogPage = () => {
+    let auth = localStorage.getItem("authToken");
+    useEffect(() => {
+        if (!auth) {
+          navigate("/login");
+        }
+      }, [navigate]);
+    
     const [url, setUrl] = useState("/wager-logs?type=");
     const [param, setParam] = useState("today");
     const {data: logs, loading, error} = useFetch(BASE_URL+url+param);

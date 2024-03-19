@@ -82,7 +82,7 @@ function HomeTabs() {
       <div className='mt-3'>
         <div className='d-flex ' style={{ width: '100%' }}>
           <div className=''>
-            <div>
+            <div className='sidebar'>
               <Nav variant='pills' className='flex-column'>
                 <Nav.Item>
                   <Nav.Link

@@ -40,8 +40,8 @@ const GameLogPage = () => {
                         <tr>
                             <th>နံပါတ်</th>
                             <th>ဂိမ်းအခြေအနေ</th>
-                            <th>အပိတ်လက်ကျန်</th>
-                            <th>အမျိုးအစား</th>
+                            {/* <th>အပိတ်လက်ကျန်</th> */}
+                            {/* <th>အမျိုးအစား</th> */}
                             <th>ပမာဏ (ကျပ်)</th>
                             <th>အချိန်</th>
                         </tr>
@@ -59,8 +59,8 @@ const GameLogPage = () => {
                             <tr key={index}>
                                 <td>{++index}</td>
                                 <td className={`${log.status == "win" ? "text-success" : "text-danger"}`}>{log.status.toUpperCase()}</td>
-                                <td>{log.closing_balance.toLocaleString()}</td>
-                                <td>{log.type}</td>
+                                {/* <td>{log.closing_balance.toLocaleString()}</td> */}
+                                {/* <td>{log.type}</td> */}
                                 <td>{parseFloat(log.amount).toLocaleString()}</td>
                                 <td>{log.datetime}</td>
                             </tr>

@@ -7,7 +7,7 @@ import '../assets/css/marquee.css';
 
 const Home = () => {
   return (
-    <div className='container'>
+    <div className='container main'>
       <div className='row mt-2'>
         <div className='col-12'>
           <Carousel />

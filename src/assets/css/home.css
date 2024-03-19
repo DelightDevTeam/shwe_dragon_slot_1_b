@@ -20,12 +20,11 @@ body {
 
 /* sidebar */
 .sidebar {
-  position: fixed;
-  top: 330px;
+  position: sticky;
+  top: 80px;
   bottom: 0;
   left: 0;
-  z-index: 100; /* Stay on top of everything */
-  padding: 48px 0 0; /* Give some top padding to show content below navbar */
+  z-index: 100; 
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -38,8 +37,9 @@ body {
 /* sidebar */
 
 .gameImg {
-  height: 100px;
-  width: 200px;
+  /* height: 100px; */
+  /* width: 200px; */
+  width: 100%;
 }
 
 footer {
@@ -113,7 +113,7 @@ footer {
 
   .gameImg {
     height: 70px;
-    width: 90%;
+    width: 100%;
   }
 }
 

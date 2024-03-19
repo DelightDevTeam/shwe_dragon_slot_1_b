@@ -10,7 +10,7 @@ import { Link, useNavigate } from 'react-router-dom';
 function GameList({ game, products, launchGame }) {
   return (
     <>
-      <h3 className='text-white'>{game?.name}</h3>
+      <h3 className='text-white text-start'>{game?.name}</h3>
       {products &&
         products.map((product) => (
           <Link
@@ -80,7 +80,7 @@ function HomeTabs() {
   return (
     <Tab.Container id='left-tabs-example' defaultActiveKey={0}>
       <div className='mt-3'>
-        <div className='d-flex ' style={{ width: '100%' }}>
+        <div className='d-flex justify-content-between' style={{ width: '100%' }}>
           <div className=''>
             <div className='sidebar'>
               <Nav variant='pills' className='flex-column'>
@@ -115,7 +115,7 @@ function HomeTabs() {
               </Nav>
             </div>
           </div>
-          <div className=' '>
+          <div className=''>
             {loading && (
               <div className='text-center'>
                 <div className='spinner-border text-white' role='status'>
@@ -124,7 +124,7 @@ function HomeTabs() {
               </div>
             )}
             <div>
-              <Tab.Pane className='ms-1 row' eventKey={0}>
+              <Tab.Pane className='ms-1 row text-center' eventKey={0}>
                 <GameList
                   game={games[0]}
                   products={slots}

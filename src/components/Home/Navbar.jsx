@@ -63,6 +63,24 @@ const Navbar = () => {
                 </button>
               </>
         )}
+          {!auth && (
+              <>
+                <NavLink to={'/login'} className="text-decoration-none">
+                  <button
+                    style={{
+                      border: '2px solid #FFD700',
+                      background: 'none',
+                      fontSize: '13px',
+                      color: '#FFD700',
+                      padding: '6px 20px',
+                    }}
+                    className='ms-2 bg-none rounded-2 d-block d-md-none'
+                  >
+                    LOGIN
+                  </button>
+                </NavLink>
+              </>
+            )}
         {window.location.pathname === '/' ? (
           <div className="text-end d-none d-md-block">
             <div className='logoIcon d-flex justify-content-center align-items-center gap-2 text-white'>
@@ -155,16 +173,16 @@ const Navbar = () => {
             )}
             {!auth && (
               <>
-                <NavLink to={'/login'}>
+                <NavLink to={'/login'} className="text-decoration-none">
                   <button
                     style={{
                       border: '2px solid #FFD700',
                       background: 'none',
                       fontSize: '13px',
                       color: '#FFD700',
-                      padding: '6px 30px',
+                      padding: '6px 20px',
                     }}
-                    className='ms-2 bg-none rounded-2'
+                    className='ms-2 bg-none rounded-2 d-none d-md-block'
                   >
                     LOGIN
                   </button>

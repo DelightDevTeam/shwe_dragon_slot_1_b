@@ -1,47 +1,66 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Form, Spinner, Tab, Table, Tabs } from 'react-bootstrap'
 import '../assets/css/history.css'
 import useFetch from '../hooks/useFetch'
 import BASE_URL from '../hooks/baseURL'
 
 const GameLogPage = () => {
-
-    const {data: logs, loading, error} = useFetch(BASE_URL+"/wager-logs");
+    const [url, setUrl] = useState("/wager-logs?type=");
+    const [param, setParam] = useState("today");
+    const {data: logs, loading, error} = useFetch(BASE_URL+url+param);
     // console.log(logs);
 
     return (
         <div className='container py-4'>
             <h1 className="mb-5 text-center text-light">Game Logs</h1>
-            <form className='mb-4'>
-                <div className="row">
-                    <div className="col-md-3 col-6">
-                        <div className="mb-3">
+            {/* <form className='mb-4'>
+                <div className="d-flex justify-content-start">
+                    <div className="">
+                        <div className="">
                             <label htmlFor="" className="form-label">Start Date</label>
-                            <input type="date" name="" id="" className='form-control' />
+                            <input type="date" name="" id="" className='form-control form-control-sm' />
                         </div>
                     </div>
-                    <div className="col-md-3 col-6">
-                        <div className="mb-3">
+                    <div className="mx-2">
+                        <div className="">
                             <label htmlFor="" className="form-label">End Date</label>
-                            <input type="date" name="" id="" className='form-control' />
+                            <input type="date" name="" id="" className='form-control form-control-sm' />
                         </div>
                     </div>
-                    <div className="col-md-3 col-6">
-                        <div className="mb-3">
+                    <div className="">
+                        <div className="">
                             <label htmlFor="" className="form-label"></label>
-                            <button className="btn btn-warning d-block" type="submit" style={{ marginTop: "7px" }}>Filter</button>
+                            <button className="btn btn-sm btn-warning d-block" type="submit" style={{ marginTop: "7px" }}>Filter</button>
                         </div>
                     </div>
                 </div>
-            </form>
+            </form> */}
+            <div className="d-flex mb-3">
+                <button 
+                className={`btn btn-sm btn-outline-warning m-md-2 m-1 ${param == "today" ? "active" : ""}`}
+                onClick={()=>setParam("today")}
+                >Today</button>
+                <button 
+                className={`btn btn-sm btn-outline-warning m-md-2 m-1 ${param == "yesterday" ? "active" : ""}`}
+                onClick={()=>setParam("yesterday")}
+                >Yesterday</button>
+                <button 
+                className={`btn btn-sm btn-outline-warning m-md-2 m-1 ${param == "this_week" ? "active" : ""}`}
+                onClick={()=>setParam("this_week")}
+                >This Week</button>
+                <button 
+                className={`btn btn-sm btn-outline-warning m-md-2 m-1 ${param == "last_week" ? "active" : ""}`}
+                onClick={()=>setParam("last_week")}
+                >Last Week</button>
+            </div>
+
+            {logs && (
             <div className="table-responsive text-center">
-                <table className="table bg-transparent">
+                <table className="table table-secondary">
                     <thead>
                         <tr>
                             <th>နံပါတ်</th>
                             <th>ဂိမ်းအခြေအနေ</th>
-                            {/* <th>အပိတ်လက်ကျန်</th> */}
-                            {/* <th>အမျိုးအစား</th> */}
                             <th>ပမာဏ (ကျပ်)</th>
                             <th>အချိန်</th>
                         </tr>
@@ -59,15 +78,17 @@ const GameLogPage = () => {
                             <tr key={index}>
                                 <td>{++index}</td>
                                 <td className={`${log.status == "win" ? "text-success" : "text-danger"}`}>{log.status.toUpperCase()}</td>
-                                {/* <td>{log.closing_balance.toLocaleString()}</td> */}
-                                {/* <td>{log.type}</td> */}
                                 <td>{parseFloat(log.amount).toLocaleString()}</td>
                                 <td>{log.datetime}</td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
+                {logs.length == 0 && (
+                    <p className='text-center text-danger'>Data များ မရှိသေးပါ။</p>
+                )}
             </div>
+            )}
         </div>
     )
 }

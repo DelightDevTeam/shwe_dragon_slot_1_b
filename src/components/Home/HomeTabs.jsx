@@ -15,7 +15,7 @@ function GameList({ game, products, launchGame }) {
         products.map((product) => (
           <Link
             key={product.id}
-            className='col-4 col-md-4 col-lg-3 col-xl-2  mb-1 mb-sm-4 btn'
+            className='col-4 col-md-4 col-lg-3 col-xl-2  mb-1 mb-sm-4 px-1 py-0 mx-0'
             onClick={() => launchGame(game?.code, product.code)}
           >
             <img

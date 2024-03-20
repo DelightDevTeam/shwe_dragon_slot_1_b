@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Form, Spinner, Tab, Table, Tabs } from 'react-bootstrap'
 import '../assets/css/history.css'
 import useFetch from '../hooks/useFetch'
 import BASE_URL from '../hooks/baseURL'
+import { useNavigate } from 'react-router-dom'
 
 const GameLogPage = () => {
     let auth = localStorage.getItem("authToken");
+    let navigate = useNavigate();
     useEffect(() => {
         if (!auth) {
           navigate("/login");

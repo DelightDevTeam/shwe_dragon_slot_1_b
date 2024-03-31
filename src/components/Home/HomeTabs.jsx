@@ -33,10 +33,19 @@ function HomeTabs() {
   const [url, setUrl] = useState(BASE_URL + '/allGameProducts');
   const { data: games, loading } = useFetch(url);
   const products = games.products;
+
   const slots = games[0]?.products;
+  const slotCode = games[0]?.code;
+
   const casinos = games[1]?.products;
+  const casinoCode = games[1]?.code;
+
   const sports = games[2]?.products;
+  const sportCode = games[2]?.code;
+
   const fishes = games[3]?.products;
+  const fishCode = games[3]?.code;
+
   const navigate = useNavigate();
 
   const [auth, setAuth] = useState(null);
@@ -54,6 +63,7 @@ function HomeTabs() {
         productId: product_code,
         gameType: gameTypeId,
       };
+      console.log(gameData);
       try {
         const response = await fetch(BASE_URL + '/game/Seamless/LaunchGame/', {
           method: 'POST',

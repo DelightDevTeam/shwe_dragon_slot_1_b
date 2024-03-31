@@ -54,7 +54,7 @@ const Navbar = () => {
           <h2 className='logo mt-1  ' style={{ color: 'gold' }}>
             <img src={logo} width={45} alt='' />
           </h2>
-          <h5 className=' logoTitle ms-2 text-light'>Max Win</h5>
+          <h5 className=' logoTitle ms-2 text-light'>Max Wins</h5>
         </NavLink>
         {auth && (
               <>
